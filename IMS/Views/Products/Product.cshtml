@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Product";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<script src="~/scripts/jquery-3.3.1.min.js"></script>
+<script src="~/scripts/bootstrap.min.js"></script>
+<link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/scripts/jquery.dataTables.min.js"></script>
+<script src="~/scripts/dataTables.bootstrap4.min.js"></script>
+<h2>Product</h2>
+<body>
+    <div class="container py-4">
+        <h4 class="text-center text-uppercase">HOW TO RETRIEVE DATA FROM DATABASE USING JQUERY AJAX IN MVC5</h4>
+        <div id="dataTable_wrapper"></div>
+        <table id="dataTable" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Age</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dataTable').DataTable({
+            "ajax": {
+                "url": "/Products/Product",
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+                { "data": "ProductCode" },
+                { "data": "ProductName" },
+                { "data": "ProductName" },
+                
+            ]
+        });
+    });
+</script>  

@@ -1,0 +1,58 @@
+﻿
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+        </div>
+        <div>
+            <label>Country Search</label>
+            <input class="form-control" id="searchInput" />
+        </div>
+        <script>
+    //$("#searchInput").autocomplete({
+    //    source: function (request, response) {
+    //        alert("Hello");
+            @*$.ajax({
+                url: '@Url.Action("GetProductByName","Home")',
+                dataType: "json",
+                method:"POST",
+                data: { search: $("#searchInput").val() },
+                
+                success: function (data) {
+                    console.log(data);
+                    response($.map(data, function (item) {
+                        return { label: item.Name, value: item.Name };
+                    }));
+        
+                },*@
+    //            error: function (xhr, status, error) {
+    //                alert("Error cccc");
+    //            }
+    //        });
+    //    }
+    //});
+
+            $(document).ready(function () {  
+       $("#searchInput").autocomplete({  
+           source: function(request,response) {  
+               $.ajax({  
+                   url: "/Home/GetProductByName",  
+                   type: "POST",  
+                   dataType: "json",  
+                   data: { Prefix: request.term },  
+                   success: function (data) { 
+                       console.log(data);
+                       response($.map(data, function (item) {  
+                           return { label: item.CityName, value: item.CityName};  
+                       }))  
+  
+                   }  
+               })  
+           },  
+           messages: {  
+               noResults: "", results: ""  
+           }  
+       });  
+   })  
+        </script>

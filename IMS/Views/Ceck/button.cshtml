@@ -1,0 +1,42 @@
+﻿
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+</div>
+<div>
+    <label>Country Search</label>
+    <h3>Enter the Username and Password:</h3>
+    (enter "admin" for both username and password)
+    <input type="text" id="usernameInput" placeholder="Username" />
+    <input type="text" id="passwordInput" placeholder="Password" />
+    <button id="submit">Submit</button>
+    <div id="dataDiv"></div>
+
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#submit").click(function (e) {
+            if ($("#usernameInput").val() == "")
+                alert("Username cannot be empty");
+            else if ($("#passwordInput").val() == "")
+                alert("Password cannot be empty");
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "/Ceck/buttonClick",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{"userName":"' + $("#usernameInput").val() + '","password":"' + $("#passwordInput").val() + '"}',
+                    dataType: "html",
+                    success: function (result, status, xhr) {
+                        $("#dataDiv").html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        $("#dataDiv").html("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+                    }
+                });
+            }
+            return false;
+        });
+    });
+    </script>

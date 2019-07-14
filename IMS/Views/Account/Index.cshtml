@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+    <div class="container">
+        <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+        </div>
+
+        <h2>Index</h2>
+
+        @*@if (User.IsInRole("Admin"))
+        {*@
+
+            <a href="@Url.Action("SignOut","Account")">Logout</a>
+        @*}*@
+
+        @if (User.IsInRole("Admin")) { 
+        <a href="@Url.Action("SignOut","Account")">SigOut </a>
+        }
+        </div>

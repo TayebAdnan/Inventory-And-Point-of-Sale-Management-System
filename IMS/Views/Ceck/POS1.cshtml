@@ -1,0 +1,19 @@
+﻿@using System.Collections
+@using IMS.Models
+@model IEnumerable<IMS.Models.Product>
+@{
+    ViewBag.Title = "POS1";
+}
+
+<h2>POS1</h2>
+
+@foreach (var sellProduct in (IEnumerable<Product>)Session["OrderdProductList"])
+{
+    <tr>
+        <td>@sellProduct.ProductId</td>
+        <td>@sellProduct.ProductName</td>
+        <td>@sellProduct.SellingPrice</td>
+        <td>@sellProduct.ProductQuantity</td>
+
+    </tr>
+}

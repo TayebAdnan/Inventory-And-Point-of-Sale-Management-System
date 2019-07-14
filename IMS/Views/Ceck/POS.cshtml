@@ -1,0 +1,276 @@
+﻿@using System.Collections
+@using IMS.Models
+@model IEnumerable<IMS.Models.Product>
+@{
+    ViewBag.Title = "POS";
+}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+/**/</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .numberInput {
+            width: 60px;
+        }
+    </style>
+</head>
+
+<div class="container">
+    <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+    </div>
+    <div>
+        <h2>POS</h2>
+        <div class="row">
+            <div class="col-lg-7" style="background-color:lavender;">
+                <div class="col-lg-12" style="margin-top:5px">
+                    <input id="myInput" type="text" placeholder="Search..">
+                    <br><br>
+                   
+
+
+
+                    <table class="table">
+
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProductCode)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProductName)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.SellingPrice)
+                            </th>
+                            <th>Qty</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        @using (Html.BeginForm())
+                        {
+
+                            foreach (var item in Model)
+                            {
+                                <tbody id="myTable">
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProductCode)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProductName)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SellingPrice)
+                                        </td>
+                                        <td>
+                                            @*<input type="number" class="numberInput" name="myNumber" id="myNumber" min="1">*@
+                                            <input type="number" class="numberInput" name="myNumber @item.ProductId" id="myNumber @item.ProductId" min="1">
+                                        </td>
+
+                                        <td>
+
+                                            @*<a onClick="myFunction(@item.ProductId)">+</a>*@
+
+                                            <a href="@Url.Action("POS1", "ceck", new { id = item.ProductId})">+</a>
+
+                                            @*<a href='@Url.Action("POS", "ceck")' onclick='navigate(this.href);'>
+                                    <input type="button" value='+' />
+                                </a>*@
+
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            }
+
+                        }
+                    </table>
+
+
+                </div>
+
+            </div>
+            <div class="col-lg-5" style="background-color:#f3ecec;">
+                <div class="row">
+                    <div class="col-lg-6" style="margin-top:5px">
+                        <address>
+                            <strong>AllyTees.com</strong>
+                            <br>
+                            P.O. Box 2012
+                            <br>
+                            Detroit, Mi 48000
+                            <br>
+                            <abbr title="Phone">P:</abbr> (213) 484-6829
+                        </address>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <p>
+                            <em>Date: November, 12 2013</em>
+                        </p>
+                        <p>
+                            <em>Receipt #: 0000015</em>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-12">
+
+                        <img src="~/Content/img/brand/blue.png" alt="allytees-500-trans.png" width="180" height="180">
+
+                    </div>
+                    <div class="col-lg-12 center">
+                        <h1>Receipt</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            @if (Session["OrderdProductList"] != null)
+                            {
+                                foreach (var sellProduct in (IEnumerable<Product>)Session["OrderdProductList"])
+                                {
+                                    <tr>
+                                        <td class="justify-content-around"><em>@sellProduct.ProductName</em></td>
+                                        <td><em>@sellProduct.ProductQuantity</em></td>
+                                        <td class="justify-content-around"><em>@sellProduct.SellingPrice</em></td>
+                                        <td class="justify-content-around"><em>@sellProduct.SellingPrice</em></td>
+
+                                    </tr>
+                                }
+                            }
+
+
+
+                            @*<tr>
+            <td class="col-md-9"><h4><em>my best-friend is transgender</em></h4></td>
+            <td class="col-md-1" style="text-align: center"> 1 </td>
+            <td class="col-md-1 text-center">$28</td>
+            <td class="col-md-1 text-center">$28</td>
+        </tr>*@
+                            }
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td class="text-right"><h4><strong>Item Total: </strong></h4></td>
+                                <td class="text-center text-danger"><h4><strong>$31.53</strong></h4></td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td class="text-right"><h4><strong>Discount </strong></h4></td>
+                                <td class="text-center text-danger"><h4><strong>$31.53</strong></h4></td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td class="text-right"><h4><strong>Vat </strong></h4></td>
+                                <td class="text-center text-danger"><h4><strong>$31.53</strong></h4></td>
+                            </tr>
+                            <tr>
+                                <td>   </td>
+                                <td>   </td>
+                                <td class="text-right"><h4><strong>Total: </strong></h4></td>
+                                <td class="text-center text-danger"><h4><strong>$31.53</strong></h4></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <button type="button" class="btn btn-success btn-lg btn-block">
+                            View SaleHold   <span class="glyphicon glyphicon-chevron-right"></span>
+                        </button>
+                    </div>
+                    <div class="col-lg-4">
+                        <button type="button" class="btn btn-success btn-lg btn-block">
+                            SaleHold   <span class="glyphicon glyphicon-chevron-right"></span>
+                        </button>
+                    </div>
+                    <div class="col-lg-4">
+                        <button type="button" class="btn btn-success btn-lg btn-block">
+                            Pay Now   <span class="glyphicon glyphicon-chevron-right"></span>
+                        </button>
+                    </div>
+                </div>
+                <h1 style="text-align:center;">
+                    Thank you for your Purchase.
+                </h1>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@*<script>
+
+    document.getElementById("demo").innerHTML = x;
+
+    function myFunction(a) {
+        var number = document.getElementById("myNumber");
+        var b = a;
+
+    }
+</script>*@
+<script>
+function myFunction(id){
+    var userId = document.getElementById("myNumber").value;
+    var data ={
+        id:id,
+        myNumber:userId
+    }
+
+    $.ajax({          //Jquery stuff
+            url : '/Ceck/POS1',
+            type:'POST',
+            data:data,
+            dataType:'html',
+            success:function(){//You can handle succes scenario}
+        });
+}
+</script>
+@*<script type='text/javascript'>
+        function navigate(target) {
+            //Grab your values
+            var username = document.getElementById('myNumber').value;
+            var password = document.getElementById('Password').value;
+
+            //Perform your navigation
+            window.location.href = target + '?UserName=' + username + '&Password=' + password;
+        }
+    </script>*@
