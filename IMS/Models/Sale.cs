@@ -25,9 +25,13 @@ namespace IMS.Models
         public int SaleId { get; set; }
         public int ProductId { get; set; }
         public int InvoiceNumber { get; set; }
+        public string SaleProductName { get; set; }
         public Nullable<int> Discount { get; set; }
         public Nullable<int> Vat { get; set; }
         public int CustomerId { get; set; }
+        public decimal SalePrice { get; set; }
+        public int SaleQuantity { get; set; }
+        public decimal TotalPrice { get; set; }
         public Nullable<System.DateTime> SaleDateTime { get; set; }
     
         public virtual Customer Customer { get; set; }

@@ -59,9 +59,47 @@ namespace IMS.Controllers
             //Session["ProductName"] =product.ProductName;
             return View("POS");
         }
-
-        public ActionResult button()
+        public ActionResult POS2(int id, FormCollection form)
         {
+
+            int qty = Convert.ToInt32(form["test"]);
+
+            Sale sale = db.Sales.FirstOrDefault(a => a.ProductId == id);
+            Product product = db.Products.FirstOrDefault(a => a.ProductId == id);
+            // var max = db.Sales.OrderByDescending(p => p.InvoiceNumber).FirstOrDefault().InvoiceNumber;
+            var max = db.Sales.Max(p => p.InvoiceNumber);
+            ViewBag.InvoiceNumber = max; 
+
+            List<Sale> Sales = (List<Sale>)Session["OrderdProductList"];
+            if (Sales == null)
+            {
+                Sales = new List<Sale>();
+            }
+
+            Sales.Add
+            (
+                new Sale()
+                {
+                    ProductId =product.ProductId,
+                    SaleDateTime = DateTime.Now,
+                    InvoiceNumber = (db.Sales.Max(p => p.InvoiceNumber))+1,
+                    SaleProductName = product.ProductName,
+                    SaleQuantity = 2,
+                    SalePrice = product.SellingPrice,
+                    TotalPrice = 2* (db.Products.FirstOrDefault(a=>a.ProductId==product.ProductId).SellingPrice),
+                }
+            );
+            Session["OrderdProductList"] = Sales;
+            POS();
+            return View("POS");
+        }
+
+        public ActionResult Sale(  FormCollection form)
+        {
+            Sale sale = new Sale();
+            sale.ProductId =Convert.ToInt32 (form["ProductId"]);
+            sale.SaleProductName =form["SaleProductName"];
+            db.SaveChanges();
             return View();
         }
         

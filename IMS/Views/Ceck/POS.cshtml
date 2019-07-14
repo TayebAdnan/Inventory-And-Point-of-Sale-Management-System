@@ -1,6 +1,7 @@
 ﻿@using System.Collections
 @using IMS.Models
 @model IEnumerable<IMS.Models.Product>
+
 @{
     ViewBag.Title = "POS";
 }
@@ -16,7 +17,7 @@
             });
         });
 
-/**/</script>
+        /**/</script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
@@ -39,7 +40,7 @@
                 <div class="col-lg-12" style="margin-top:5px">
                     <input id="myInput" type="text" placeholder="Search..">
                     <br><br>
-                   
+
 
 
 
@@ -59,9 +60,7 @@
                             <th>Qty</th>
                             <th></th>
                         </tr>
-                        <tr>
-                            
-                        </tr>
+                        <tr></tr>
                         @using (Html.BeginForm())
                         {
 
@@ -86,13 +85,7 @@
 
                                         <td>
 
-                                            @*<a onClick="myFunction(@item.ProductId)">+</a>*@
-
-                                            <a href="@Url.Action("POS1", "ceck", new { id = item.ProductId})">+</a>
-
-                                            @*<a href='@Url.Action("POS", "ceck")' onclick='navigate(this.href);'>
-                                    <input type="button" value='+' />
-                                </a>*@
+                                            <a href="@Url.Action("POS2", "ceck", new { id = item.ProductId})">+</a>
 
                                         </td>
 
@@ -109,7 +102,7 @@
             </div>
             <div class="col-lg-5" style="background-color:#f3ecec;">
                 <div class="row">
-                    <div class="col-lg-6" style="margin-top:5px">
+                    <div class="col-lg-5" style="margin-top:5px">
                         <address>
                             <strong>AllyTees.com</strong>
                             <br>
@@ -120,12 +113,12 @@
                             <abbr title="Phone">P:</abbr> (213) 484-6829
                         </address>
                     </div>
-                    <div class="col-lg-6 text-right">
+                    <div class="col-lg-7 text-right">
                         <p>
-                            <em>Date: November, 12 2013</em>
+                            <em>Date: @DateTime.Now</em>
                         </p>
                         <p>
-                            <em>Receipt #: 0000015</em>
+                            <em>Receipt # </em>
                         </p>
                     </div>
 
@@ -154,22 +147,23 @@
                             </tr>
                         </thead>
                         <tbody>
-
-
-                            @if (Session["OrderdProductList"] != null)
+                            @using (Html.BeginForm())
                             {
-                                foreach (var sellProduct in (IEnumerable<Product>)Session["OrderdProductList"])
-                                {
-                                    <tr>
-                                        <td class="justify-content-around"><em>@sellProduct.ProductName</em></td>
-                                        <td><em>@sellProduct.ProductQuantity</em></td>
-                                        <td class="justify-content-around"><em>@sellProduct.SellingPrice</em></td>
-                                        <td class="justify-content-around"><em>@sellProduct.SellingPrice</em></td>
 
-                                    </tr>
+                                if (Session["OrderdProductList"] != null)
+                                {
+                                    foreach (var sellProduct in (IEnumerable<Sale>)Session["OrderdProductList"])
+                                    {
+                                        <tr>
+                                            <td name="SaleProductName" class="justify-content-around"><em>@sellProduct.SaleProductName</em></td>
+                                            <td name="SaleQuantity"><em>@sellProduct.SaleQuantity</em></td>
+                                            <td name ="SalePrice" class="justify-content-around"><em>@sellProduct.SalePrice</em></td>
+                                            <td name="TotalPrice" class="justify-content-around"><em>@sellProduct.TotalPrice</em></td>
+
+                                        </tr>
+                                    }
                                 }
                             }
-
 
 
                             @*<tr>
@@ -178,7 +172,7 @@
             <td class="col-md-1 text-center">$28</td>
             <td class="col-md-1 text-center">$28</td>
         </tr>*@
-                            }
+
                             <tr>
                                 <td>   </td>
                                 <td>   </td>
@@ -239,30 +233,30 @@
 
 @*<script>
 
-    document.getElementById("demo").innerHTML = x;
+        document.getElementById("demo").innerHTML = x;
 
-    function myFunction(a) {
-        var number = document.getElementById("myNumber");
-        var b = a;
+        function myFunction(a) {
+            var number = document.getElementById("myNumber");
+            var b = a;
 
-    }
-</script>*@
+        }
+    </script>*@
 <script>
-function myFunction(id){
-    var userId = document.getElementById("myNumber").value;
-    var data ={
-        id:id,
-        myNumber:userId
-    }
+    function myFunction(id) {
+        var userId = document.getElementById("myNumber").value;
+        var data = {
+            id: id,
+            myNumber: userId
+        }
 
-    $.ajax({          //Jquery stuff
-            url : '/Ceck/POS1',
-            type:'POST',
-            data:data,
-            dataType:'html',
-            success:function(){//You can handle succes scenario}
-        });
-}
+        $.ajax({          //Jquery stuff
+            url: '/Ceck/POS1',
+            type: 'POST',
+            data: data,
+            dataType: 'html',
+            success: function () {//You can handle succes scenario}
+            });
+    }
 </script>
 @*<script type='text/javascript'>
         function navigate(target) {

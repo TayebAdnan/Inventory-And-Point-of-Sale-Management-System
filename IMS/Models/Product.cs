@@ -32,7 +32,7 @@ namespace IMS.Models
         public int SizeId { get; set; }
         public Nullable<int> ProductQuantity { get; set; }
         public Nullable<int> AlertQuantity { get; set; }
-        public string SellingPrice { get; set; }
+        public decimal SellingPrice { get; set; }
         //public byte[] Image { get; set; }
 
         public String ProductImage { get; set; }
