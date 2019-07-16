@@ -91,10 +91,10 @@
           </Key>
           <Property Name="SaleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="InvoiceNumber" Type="int" Nullable="false" />
+          <Property Name="TransactionId" Type="int" Nullable="false" />
           <Property Name="SaleProductName" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Discount" Type="int" />
-          <Property Name="Vat" Type="int" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Vat" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="SaleDateTime" Type="datetime" />
           <Property Name="SalePrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
@@ -107,10 +107,11 @@
           </Key>
           <Property Name="SaleHoldId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="SaleHoldDateTime" Type="datetime" />
+          <Property Name="SaleHoldDateTime" Type="datetime" Nullable="false" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
-          <Property Name="SaleHoldQuantity" Type="int" />
+          <Property Name="SaleHoldQuantity" Type="int" Nullable="false" />
           <Property Name="SaleId" Type="int" Nullable="false" />
+          <Property Name="TransactionId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -124,11 +125,11 @@
             <PropertyRef Name="TransactionId" />
           </Key>
           <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SaleId" Type="int" Nullable="false" />
-          <Property Name="SaleDateTime" Type="datetime" Nullable="false" />
-          <Property Name="TransactionCost" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="ReceiveAmount" Type="nvarchar" MaxLength="50" />
-          <Property Name="ChangeAmount" Type="nvarchar" MaxLength="50" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Vat" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -251,6 +252,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sale_Transaction">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="TransactionId" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SaleHold_Sale">
           <End Role="Sale" Type="Self.Sale" Multiplicity="1" />
           <End Role="SaleHold" Type="Self.SaleHold" Multiplicity="*" />
@@ -263,15 +276,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Transaction_Sale">
-          <End Role="Sale" Type="Self.Sale" Multiplicity="1" />
-          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+        <Association Name="FK_SaleHold_Transaction">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="1" />
+          <End Role="SaleHold" Type="Self.SaleHold" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Sale">
-              <PropertyRef Name="SaleId" />
+            <Principal Role="Transaction">
+              <PropertyRef Name="TransactionId" />
             </Principal>
-            <Dependent Role="Transaction">
-              <PropertyRef Name="SaleId" />
+            <Dependent Role="SaleHold">
+              <PropertyRef Name="TransactionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -287,6 +300,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AddRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RoleName" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="IMSModelStoreContainer">
           <EntitySet Name="Adjustment" EntityType="Self.Adjustment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -338,13 +354,17 @@
             <End Role="Sale" EntitySet="Sale" />
             <End Role="ProductSale" EntitySet="ProductSale" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sale_Transaction" Association="Self.FK_Sale_Transaction">
+            <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
           <AssociationSet Name="FK_SaleHold_Sale" Association="Self.FK_SaleHold_Sale">
             <End Role="Sale" EntitySet="Sale" />
             <End Role="SaleHold" EntitySet="SaleHold" />
           </AssociationSet>
-          <AssociationSet Name="FK_Transaction_Sale" Association="Self.FK_Transaction_Sale">
-            <End Role="Sale" EntitySet="Sale" />
+          <AssociationSet Name="FK_SaleHold_Transaction" Association="Self.FK_SaleHold_Transaction">
             <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="SaleHold" EntitySet="SaleHold" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Role" Association="Self.FK_Users_Role">
             <End Role="Role" EntitySet="Role" />
@@ -460,7 +480,6 @@
           </Key>
           <Property Name="SaleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="InvoiceNumber" Type="Int32" Nullable="false" />
           <Property Name="Discount" Type="Int32" />
           <Property Name="Vat" Type="Int32" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
@@ -469,11 +488,12 @@
           <NavigationProperty Name="Product" Relationship="Self.FK_Sale_Product" FromRole="Sale" ToRole="Product" />
           <NavigationProperty Name="ProductSales" Relationship="Self.FK_ProductSale_Sale" FromRole="Sale" ToRole="ProductSale" />
           <NavigationProperty Name="SaleHolds" Relationship="Self.FK_SaleHold_Sale" FromRole="Sale" ToRole="SaleHold" />
-          <NavigationProperty Name="Transactions" Relationship="Self.FK_Transaction_Sale" FromRole="Sale" ToRole="Transaction" />
           <Property Name="SaleQuantity" Type="Int32" Nullable="false" />
           <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="SalePrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="SaleProductName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TransactionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Transaction" Relationship="IMSModel.FK_Sale_Transaction" FromRole="Sale" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="SaleHold">
           <Key>
@@ -481,11 +501,13 @@
           </Key>
           <Property Name="SaleHoldId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="SaleHoldDateTime" Type="DateTime" Precision="3" />
+          <Property Name="SaleHoldDateTime" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="SaleHoldQuantity" Type="Int32" />
+          <Property Name="SaleHoldQuantity" Type="Int32" Nullable="false" />
           <Property Name="SaleId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Sale" Relationship="Self.FK_SaleHold_Sale" FromRole="SaleHold" ToRole="Sale" />
+          <Property Name="TransactionId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Transaction" Relationship="IMSModel.FK_SaleHold_Transaction" FromRole="SaleHold" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -500,12 +522,13 @@
             <PropertyRef Name="TransactionId" />
           </Key>
           <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SaleId" Type="Int32" Nullable="false" />
-          <Property Name="SaleDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TransactionCost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ReceiveAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ChangeAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Sale" Relationship="Self.FK_Transaction_Sale" FromRole="Transaction" ToRole="Sale" />
+          <Property Name="InvoiceNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Vat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Sales" Relationship="IMSModel.FK_Sale_Transaction" FromRole="Transaction" ToRole="Sale" />
+          <NavigationProperty Name="SaleHolds" Relationship="IMSModel.FK_SaleHold_Transaction" FromRole="Transaction" ToRole="SaleHold" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -679,15 +702,8 @@
         </Association>
         <Association Name="FK_Transaction_Sale">
           <End Role="Sale" Type="Self.Sale" Multiplicity="1" />
-          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sale">
-              <PropertyRef Name="SaleId" />
-            </Principal>
-            <Dependent Role="Transaction">
-              <PropertyRef Name="SaleId" />
-            </Dependent>
-          </ReferentialConstraint>
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" >
+          </End>
         </Association>
         <EntityContainer Name="IMSEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Adjustments" EntityType="Self.Adjustment" />
@@ -756,11 +772,62 @@
             <End Role="Sale" EntitySet="Sales" />
             <End Role="SaleHold" EntitySet="SaleHolds" />
           </AssociationSet>
-          <AssociationSet Name="FK_Transaction_Sale" Association="Self.FK_Transaction_Sale">
+          <AssociationSet Name="FK_Transaction_Sale" Association="IMSModel.FK_Transaction_Sale">
             <End Role="Sale" EntitySet="Sales" />
             <End Role="Transaction" EntitySet="Transactions" />
           </AssociationSet>
+          <FunctionImport Name="AddRole">
+          <Parameter Name="RoleName" Mode="In" Type="String" />
+          </FunctionImport>
+          <AssociationSet Name="FK_Sale_Transaction" Association="IMSModel.FK_Sale_Transaction">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleHold_Transaction" Association="IMSModel.FK_SaleHold_Transaction">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="SaleHold" EntitySet="SaleHolds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Transaction" Association="IMSModel.FK_Transaction_Transaction">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="Transaction1" EntitySet="Transactions" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Sale_Transaction">
+          <End Type="IMSModel.Transaction" Role="Transaction" Multiplicity="1" />
+          <End Type="IMSModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="TransactionId" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleHold_Transaction">
+          <End Type="IMSModel.Transaction" Role="Transaction" Multiplicity="1" />
+          <End Type="IMSModel.SaleHold" Role="SaleHold" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="TransactionId" />
+            </Principal>
+            <Dependent Role="SaleHold">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_Transaction">
+          <End Type="IMSModel.Transaction" Role="Transaction" Multiplicity="1" />
+          <End Type="IMSModel.Transaction" Role="Transaction1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="TransactionId" />
+            </Principal>
+            <Dependent Role="Transaction1">
+              <PropertyRef Name="TransactionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -859,13 +926,13 @@
           <EntitySetMapping Name="Sales">
             <EntityTypeMapping TypeName="IMSModel.Sale">
               <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="SaleProductName" ColumnName="SaleProductName" />
                 <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
                 <ScalarProperty Name="SaleQuantity" ColumnName="SaleQuantity" />
                 <ScalarProperty Name="SaleId" ColumnName="SaleId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="Vat" ColumnName="Vat" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
@@ -876,6 +943,7 @@
           <EntitySetMapping Name="SaleHolds">
             <EntityTypeMapping TypeName="IMSModel.SaleHold">
               <MappingFragment StoreEntitySet="SaleHold">
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="SaleHoldId" ColumnName="SaleHoldId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="SaleHoldDateTime" ColumnName="SaleHoldDateTime" />
@@ -896,13 +964,13 @@
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="IMSModel.Transaction">
               <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Vat" ColumnName="Vat" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="ItemTotal" ColumnName="ItemTotal" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
                 <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
-                <ScalarProperty Name="SaleId" ColumnName="SaleId" />
-                <ScalarProperty Name="SaleDateTime" ColumnName="SaleDateTime" />
-                <ScalarProperty Name="TransactionCost" ColumnName="TransactionCost" />
-                <ScalarProperty Name="ReceiveAmount" ColumnName="ReceiveAmount" />
-                <ScalarProperty Name="ChangeAmount" ColumnName="ChangeAmount" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
@@ -919,6 +987,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddRole" FunctionName="IMSModel.Store.AddRole" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

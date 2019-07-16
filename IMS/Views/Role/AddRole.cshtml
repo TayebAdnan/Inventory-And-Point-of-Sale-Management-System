@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "AddRole";
+}
+<div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+</div>
+<h2>AddRole</h2>
+
+
+<script>
+
+    $(document).ready(function () {
+        $("#btnSave").click(function () {
+           
+            $.ajax(
+                {
+                   
+                    type: "POST", //HTTP POST Method
+                    url: "Role/AddRole", // Controller/View
+                    data: { //Passing data
+                        RoleName: $("#txtName").val() //Reading text box values using Jquery
+
+                    }
+
+                });
+
+        });
+    });
+
+</script>
+<br /><br />
+<fieldset>
+    <div class="form-horizontal">
+        <div class="editor-label">
+            Name
+        </div>
+        <div class="editor-label">
+            <input type="text" name ="RoleName"id="txtName" />
+        </div>
+
+        <div class="editor-label">
+            <br />
+            @Html.ActionLink("Save", "AddRole");
+        </div>
+    </div>
+</fieldset>  

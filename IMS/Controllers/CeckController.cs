@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IMS.Models;
+using static System.Net.WebRequestMethods;
 
 namespace IMS.Controllers
 {
@@ -66,9 +70,9 @@ namespace IMS.Controllers
 
             Sale sale = db.Sales.FirstOrDefault(a => a.ProductId == id);
             Product product = db.Products.FirstOrDefault(a => a.ProductId == id);
-            // var max = db.Sales.OrderByDescending(p => p.InvoiceNumber).FirstOrDefault().InvoiceNumber;
-            var max = db.Sales.Max(p => p.InvoiceNumber);
-            ViewBag.InvoiceNumber = max; 
+            //db.Sales.OrderByDescending(p => p.InvoiceNumber).FirstOrDefault();
+            var max = db.Sales.Max(p => p.SaleId);
+            //ViewBag.InvoiceNumber = max; 
 
             List<Sale> Sales = (List<Sale>)Session["OrderdProductList"];
             if (Sales == null)
@@ -82,7 +86,7 @@ namespace IMS.Controllers
                 {
                     ProductId =product.ProductId,
                     SaleDateTime = DateTime.Now,
-                    InvoiceNumber = (db.Sales.Max(p => p.InvoiceNumber))+1,
+                    
                     SaleProductName = product.ProductName,
                     SaleQuantity = 2,
                     SalePrice = product.SellingPrice,
@@ -93,14 +97,33 @@ namespace IMS.Controllers
             POS();
             return View("POS");
         }
+       
+        
 
-        public ActionResult Sale(  FormCollection form)
+        public ActionResult Sale()
         {
-            Sale sale = new Sale();
-            sale.ProductId =Convert.ToInt32 (form["ProductId"]);
-            sale.SaleProductName =form["SaleProductName"];
-            db.SaveChanges();
-            return View();
+            List<Sale> sales = new List<Sale>();
+             sales = (List<Sale>)Session["OrderdProductList"];
+            foreach(var item in sales)
+            {
+                db.Sales.Add(
+                    new Sale()
+                    {
+                        ProductId = item.ProductId,
+                        SaleProductName = item.SaleProductName,
+                        SaleDateTime = item.SaleDateTime,
+                        SalePrice = item.SalePrice,
+                        SaleQuantity = item.SaleQuantity,
+                        
+                        TotalPrice = item.TotalPrice
+                    }
+                    );
+                db.SaveChanges();
+            }
+
+            Session.Remove("OrderdProductList");
+            POS();
+            return View("POS");
         }
         
         public ActionResult GetSellingProduct(string id)

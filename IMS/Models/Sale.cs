@@ -19,15 +19,12 @@ namespace IMS.Models
         {
             this.ProductSales = new HashSet<ProductSale>();
             this.SaleHolds = new HashSet<SaleHold>();
-            this.Transactions = new HashSet<Transaction>();
+            //this.Transactions = new HashSet<Transaction>();
         }
     
         public int SaleId { get; set; }
         public int ProductId { get; set; }
-        public int InvoiceNumber { get; set; }
         public string SaleProductName { get; set; }
-        public Nullable<int> Discount { get; set; }
-        public Nullable<int> Vat { get; set; }
         public int CustomerId { get; set; }
         public decimal SalePrice { get; set; }
         public int SaleQuantity { get; set; }
@@ -36,11 +33,13 @@ namespace IMS.Models
     
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Transaction Transaction { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductSale> ProductSales { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SaleHold> SaleHolds { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<Transaction> Transactions { get; set; }
+
     }
 }

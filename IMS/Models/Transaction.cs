@@ -15,12 +15,12 @@ namespace IMS.Models
     public partial class Transaction
     {
         public int TransactionId { get; set; }
-        public int SaleId { get; set; }
-        public System.DateTime SaleDateTime { get; set; }
-        public string TransactionCost { get; set; }
-        public string ReceiveAmount { get; set; }
-        public string ChangeAmount { get; set; }
-    
-        public virtual Sale Sale { get; set; }
+        public string InvoiceNumber { get; set; }
+        public decimal ItemTotal { get; set; }
+        public decimal Discount { get; set; }
+        public decimal Vat { get; set; }
+        public decimal TotalAmount { get; set; }
+
+        //public virtual Sale Sale { get; set; }
     }
 }
