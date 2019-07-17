@@ -12,93 +12,92 @@
         <h2>Index</h2>
 
         <p>
-            @Html.ActionLink("Create New", "Create","Product")
+            @Html.ActionLink("Create New", "Create", "Products")
         </p>
-        @Html.ActionLink("profile", "MyProfile","Ceck", new { id = User.Identity.Name })
+            <table class="table">
 
-        <table class="table">
-
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProductCode)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProductName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProductQuantity)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AlertQuantity)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SellingPrice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProductImage)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProductDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Category.CategoryName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Color.ColorName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Manufacture.LotNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Size.SizeName)
-                </th>
-                <th></th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductQuantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AlertQuantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SellingPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductImage)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProductDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Category.CategoryName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Color.ColorName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Manufacture.LotNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Size.SizeName)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductQuantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AlertQuantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SellingPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductImage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Category.CategoryName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Color.ColorName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Manufacture.LotNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Size.SizeName)
+                    </th>
+                    <th></th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductQuantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AlertQuantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SellingPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductImage)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Color.ColorName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Manufacture.LotNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Size.SizeName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            
     </div>
     

@@ -11,7 +11,7 @@ namespace IMS.Controllers
 {
     public class AccountController : Controller
     {
-        IMSEntities3 db = new IMSEntities3();
+        IMSEntities4 db = new IMSEntities4();
 
         public ActionResult Index()
         {
@@ -27,7 +27,7 @@ namespace IMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (IMSEntities3 db = new IMSEntities3())
+                using (IMSEntities4 db = new IMSEntities4())
                 {
                     var obj = db.Users.Where(a => a.UserEmail.Equals(objUser.UserEmail) && a.UserPassword.Equals(objUser.UserPassword)).FirstOrDefault();
                     if (obj != null)

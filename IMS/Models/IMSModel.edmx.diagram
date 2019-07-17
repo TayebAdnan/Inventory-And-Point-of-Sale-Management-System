@@ -4,38 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d1d867d8ef71461aad6bc3d24decb588" Name="Diagram1" ZoomLevel="87">
-        <EntityTypeShape EntityType="IMSModel.Adjustment" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.Category" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.Color" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.Customer" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.Manufacture" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.ManufactureProduct" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.Product" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.ProductSale" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.Role" Width="1.5" PointX="7.75" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.Sale" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.SaleHold" Width="1.5" PointX="10.5" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.Size" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.Transaction" Width="1.5" PointX="10.5" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="IMSModel.User" Width="1.5" PointX="10" PointY="11" IsExpanded="true" />
+      <Diagram DiagramId="3b186034cc6444b2acb5e3eda97f76fd" Name="Diagram1">
+        <EntityTypeShape EntityType="IMSModel.Adjustment" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.Category" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.Color" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.Customer" Width="1.5" PointX="2.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.Manufacture" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.ManufactureProduct" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.Product" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.ProductSale" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.Role" Width="1.5" PointX="7.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.Sale" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.SaleHold" Width="1.5" PointX="8.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.Size" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.Transaction" Width="1.5" PointX="3.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IMSModel.User" Width="1.5" PointX="10" PointY="10.375" IsExpanded="true" />
         <AssociationConnector Association="IMSModel.FK_Adjustment_Product" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_Category_Category" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_Product_Color" ManuallyRouted="false" />
-        <AssociationConnector Association="IMSModel.FK_Sale_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_Product_Manufacture" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_ManufactureProduct_Product" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_Product_Size" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_ProductSale_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="IMSModel.FK_Sale_Product" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_ProductSale_Sale" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_Users_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSModel.FK_Sale_Transaction" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_SaleHold_Sale" ManuallyRouted="false" />
-        
-        <AssociationConnector Association="IMSModel.FK_Sale_Transaction" />
-        <AssociationConnector Association="IMSModel.FK_SaleHold_Transaction" />
-        <AssociationConnector Association="IMSModel.FK_Transaction_Transaction" />
+        <AssociationConnector Association="IMSModel.FK_SaleHold_Transaction" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

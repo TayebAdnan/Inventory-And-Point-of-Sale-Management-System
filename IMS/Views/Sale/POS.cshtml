@@ -87,7 +87,7 @@
 
                                     <td>
 
-                                        <a href="@Url.Action("POS2", "ceck", new { id = item.ProductId})">+</a>
+                                        <a href="@Url.Action("GetProductInReceipt", "Sale", new { id = item.ProductId})">+</a>
 
                                     </td>
 
@@ -120,7 +120,7 @@
                             <em>Date: @DateTime.Now</em>
                         </p>
                         <p name="Receipt" value="2">
-                            <em>Receipt # </em>
+                            <em>Receipt # @ViewBag.InvoiceNumber </em>
                         </p>
                     </div>
 
@@ -149,7 +149,7 @@
                             </tr>
                         </thead>
 
-                        <tbody >
+                        <tbody>
 
                             @if (Session["OrderdProductList"] != null)
                             {
@@ -177,7 +177,7 @@
                                 <td>   </td>
                                 <td>   </td>
                                 <td class="text-right"><h4><strong>Item Total: </strong></h4></td>
-                                <td class="text-center text-danger"><h4><strong>$31.53</strong></h4></td>
+                                <td class="text-center text-danger"><h4><strong>@ViewBag.ItemTotal</strong></h4></td>
                             </tr>
                             <tr>
                                 <td>   </td>
@@ -189,13 +189,13 @@
                                 <td>   </td>
                                 <td>   </td>
                                 <td class="text-right"><h4><strong>Vat </strong></h4></td>
-                                <td class="text-center text-danger"><h4><strong>$31.53</strong></h4></td>
+                                <td class="text-center text-danger"><h4><strong>@ViewBag.Vat</strong></h4></td>
                             </tr>
                             <tr>
                                 <td>   </td>
                                 <td>   </td>
                                 <td class="text-right"><h4><strong>Total Amount: </strong></h4></td>
-                                <td class="text-center text-danger"><h4><strong>$31.53</strong></h4></td>
+                                <td class="text-center text-danger"><h4><strong>@ViewBag.TotalAmount</strong></h4></td>
                             </tr>
                         </tbody>
 
@@ -219,7 +219,7 @@
                     </div>
                     <div class="col-lg-4">
 
-                        <a href='@Url.Action("Sale", "Ceck")'> Pay Now </a>  <span class="glyphicon glyphicon-chevron-right"></span>
+                        <a href='@Url.Action("Sale", "Sale")'> Pay Now </a>  <span class="glyphicon glyphicon-chevron-right"></span>
 
 
                     </div>

@@ -13,7 +13,7 @@ namespace IMS.Controllers
 {
     public class CeckController : Controller
     {
-        IMSEntities3 db = new IMSEntities3();
+        IMSEntities4 db = new IMSEntities4();
         // GET: Ceck
         public ActionResult Index()
 
@@ -79,6 +79,10 @@ namespace IMS.Controllers
             {
                 Sales = new List<Sale>();
             }
+            Transaction transaction = new Transaction();
+            int lastProductId = db.Transactions.Max(item => item.TransactionId);
+            
+            Session["InvoiceNumber"] = transaction.InvoiceNumber;
 
             Sales.Add
             (
@@ -114,8 +118,8 @@ namespace IMS.Controllers
                         SaleDateTime = item.SaleDateTime,
                         SalePrice = item.SalePrice,
                         SaleQuantity = item.SaleQuantity,
-                        
-                        TotalPrice = item.TotalPrice
+                        TotalPrice = item.TotalPrice,
+                        TransactionId = 3
                     }
                     );
                 db.SaveChanges();

@@ -11,6 +11,7 @@ namespace IMS.Controllers
     {
         public ActionResult Index()
         {
+            Session.Remove("OrderdProductList");
             return View();
         }
 
@@ -33,7 +34,7 @@ namespace IMS.Controllers
         }
         public JsonResult GetProductByName(string search)
         {
-            IMSEntities3 db = new IMSEntities3();
+            IMSEntities4 db = new IMSEntities4();
             //var allsearch = (from c in db.Products
             //                 where c.ProductName.StartsWith(search)
             //                 select new { c.ProductName, c.ProductId });

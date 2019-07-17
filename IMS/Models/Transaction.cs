@@ -14,13 +14,23 @@ namespace IMS.Models
     
     public partial class Transaction
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Transaction()
+        {
+            this.Sales = new HashSet<Sale>();
+            this.SaleHolds = new HashSet<SaleHold>();
+        }
+    
         public int TransactionId { get; set; }
-        public string InvoiceNumber { get; set; }
+        public int InvoiceNumber { get; set; }
         public decimal ItemTotal { get; set; }
-        public decimal Discount { get; set; }
-        public decimal Vat { get; set; }
+        public Nullable<decimal> Discount { get; set; }
+        public Nullable<decimal> Vat { get; set; }
         public decimal TotalAmount { get; set; }
-
-        //public virtual Sale Sale { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sale> Sales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SaleHold> SaleHolds { get; set; }
     }
 }

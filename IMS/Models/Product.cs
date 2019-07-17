@@ -11,8 +11,7 @@ namespace IMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
+    
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +20,6 @@ namespace IMS.Models
             this.Adjustments = new HashSet<Adjustment>();
             this.ManufactureProducts = new HashSet<ManufactureProduct>();
             this.ProductSales = new HashSet<ProductSale>();
-            this.Sales = new HashSet<Sale>();
         }
     
         public int ProductId { get; set; }
@@ -33,9 +31,7 @@ namespace IMS.Models
         public Nullable<int> ProductQuantity { get; set; }
         public Nullable<int> AlertQuantity { get; set; }
         public decimal SellingPrice { get; set; }
-        //public byte[] Image { get; set; }
-
-        public String ProductImage { get; set; }
+        public string ProductImage { get; set; }
         public int ManufactureId { get; set; }
         public Nullable<System.DateTime> ProductDate { get; set; }
     
@@ -49,13 +45,5 @@ namespace IMS.Models
         public virtual Size Size { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductSale> ProductSales { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sale> Sales { get; set; }
-
-
-        
-        public HttpPostedFileBase ImageFile { get; set; }
-
-
     }
 }

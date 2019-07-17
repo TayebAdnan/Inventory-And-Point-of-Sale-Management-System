@@ -139,6 +139,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -218,6 +219,8 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\brand\blue.png" />
+    <Content Include="Content\img\brand\caveman.png" />
+    <Content Include="Content\img\brand\CaveMan1.png" />
     <Content Include="Content\img\brand\favicon.png" />
     <Content Include="Content\img\brand\white.png" />
     <Content Include="Content\img\icons\common\github.svg" />
@@ -2215,6 +2218,7 @@
     <Content Include="Views\Ceck\POS1.cshtml" />
     <Content Include="Views\Role\AddRole.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Sale\POS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,11 +16,16 @@ namespace IMS.Models
     {
         public int SaleHoldId { get; set; }
         public int ProductId { get; set; }
-        public Nullable<System.DateTime> SaleHoldDateTime { get; set; }
+        public String SaleHoldName { get; set; }
+        public decimal SaleHoldPrice { get; set; }
+        public decimal SaleHoldTotalPrice { get; set; }
+        public System.DateTime SaleHoldDateTime { get; set; }
         public int CustomerId { get; set; }
-        public Nullable<int> SaleHoldQuantity { get; set; }
+        public int SaleHoldQuantity { get; set; }
         public int SaleId { get; set; }
+        public int TransactionId { get; set; }
     
         public virtual Sale Sale { get; set; }
+        public virtual Transaction Transaction { get; set; }
     }
 }

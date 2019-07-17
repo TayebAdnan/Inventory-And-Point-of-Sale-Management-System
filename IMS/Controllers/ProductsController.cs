@@ -13,7 +13,7 @@ namespace IMS.Controllers
 {
     public class ProductsController : Controller
     {
-        private IMSEntities3 db = new IMSEntities3();
+        private IMSEntities4 db = new IMSEntities4();
 
         // GET: Products
         public ActionResult Index()
@@ -60,13 +60,13 @@ namespace IMS.Controllers
         public ActionResult Create([Bind(Include = "ProductId,ProductCode,ProductName,CategoryId,ColorId,SizeId,ProductQuantity,AlertQuantity,SellingPrice,Image,ManufactureId,ProductDate")]
        Product imageModel, Product product)
         {
-            string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
-            string extension = Path.GetExtension(imageModel.ImageFile.FileName);
-            fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
-            imageModel.ProductImage = "~/App_File/ProductImages/" + fileName;
-            fileName = Path.Combine(Server.MapPath("~/App_File/ProductImages/"), fileName);
-            imageModel.ImageFile.SaveAs(fileName);
-            using (IMSEntities3 dba = new IMSEntities3())
+            //string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
+            //string extension = Path.GetExtension(imageModel.ImageFile.FileName);
+            //fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
+            //imageModel.ProductImage = "~/App_File/ProductImages/" + fileName;
+            //fileName = Path.Combine(Server.MapPath("~/App_File/ProductImages/"), fileName);
+            //imageModel.ImageFile.SaveAs(fileName);
+            using (IMSEntities4 dba = new IMSEntities4())
             {
                 dba.Products.Add(imageModel);
                 dba.SaveChanges();
@@ -158,7 +158,7 @@ namespace IMS.Controllers
 
         public JsonResult GetSearchValue(string search)
         {
-            IMSEntities3 db = new IMSEntities3();
+            IMSEntities4 db = new IMSEntities4();
             var allsearch = (from c in db.Products
                              where c.ProductName.StartsWith(search)
                              select new { c.ProductName, c.ProductId });
