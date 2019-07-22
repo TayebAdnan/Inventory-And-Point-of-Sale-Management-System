@@ -1,0 +1,66 @@
+﻿@model IEnumerable<IMS.Models.SaleHold>
+
+@{
+    ViewBag.Title = "ViewSaleHold";
+}
+
+    <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+    </div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleHoldName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleHoldPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleHoldTotalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleHoldDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SaleHoldQuantity)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleHoldName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleHoldPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleHoldTotalPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleHoldDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleHoldQuantity)
+        </td>
+        
+        <td>
+           @Html.ActionLink("Unhold","Unhold","Sale")
+        </td>
+    </tr>
+}
+
+</table>

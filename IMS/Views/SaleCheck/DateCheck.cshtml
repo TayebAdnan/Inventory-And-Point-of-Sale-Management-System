@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "DateCheck";
+}
+
+
+    <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+    </div>
+<h2>DateCheck</h2>
+
+<form id='your-range-form' action='@Url.Action("Data","SaleCheckController")' method='post'>
+    <input id='from' type="date" name='fromDate' />
+    <input id='to' type="date" name='toDate' />
+    <input type='submit' value='Set Range' />
+</form>

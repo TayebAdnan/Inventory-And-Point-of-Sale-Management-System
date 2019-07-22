@@ -12,7 +12,7 @@ namespace IMS.Controllers
 {
     public class UsersController : Controller
     {
-        private IMSEntities4 db = new IMSEntities4();
+        private IMSEntities5 db = new IMSEntities5();
 
         // GET: Users
         public ActionResult Index()

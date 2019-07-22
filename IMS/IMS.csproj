@@ -139,68 +139,70 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SaleCheckController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Adjustment.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Color.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\IMSModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IMSModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\IMSModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IMSModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\IMSModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IMSModel.edmx</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Manufacture.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManufactureProduct.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductPartial.cs" />
     <Compile Include="Models\ProductSale.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sale.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SaleHold.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SaleTransaction.cs" />
     <Compile Include="Models\Size.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Transaction.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>IMSModel.tt</DependentUpon>
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ProjectRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -219,12 +221,12 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\brand\blue.png" />
-    <Content Include="Content\img\brand\caveman.png" />
-    <Content Include="Content\img\brand\CaveMan1.png" />
+    <Content Include="Content\img\brand\CMI.png" />
     <Content Include="Content\img\brand\favicon.png" />
     <Content Include="Content\img\brand\white.png" />
     <Content Include="Content\img\icons\common\github.svg" />
     <Content Include="Content\img\icons\common\google.svg" />
+    <Content Include="Content\img\theme\a.png" />
     <Content Include="Content\img\theme\angular.jpg" />
     <Content Include="Content\img\theme\bootstrap.jpg" />
     <Content Include="Content\img\theme\profile-cover.jpg" />
@@ -1599,15 +1601,15 @@
     <Content Include="Content\vendor\fontawesome\fontawesome-free\webfonts\fa-brands-400.svg" />
     <Content Include="Content\vendor\fontawesome\fontawesome-free\webfonts\fa-regular-400.svg" />
     <Content Include="Content\vendor\fontawesome\fontawesome-free\webfonts\fa-solid-900.svg" />
-    <Content Include="Models\IMSModel.Context.tt">
+    <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IMSModel.edmx</DependentUpon>
-      <LastGenOutput>IMSModel.Context.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\IMSModel.tt">
+    <Content Include="Models\Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IMSModel.edmx</DependentUpon>
-      <LastGenOutput>IMSModel.cs</LastGenOutput>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\anchor-js\anchor.min.js" />
     <Content Include="Scripts\anchor-js\banner.js" />
@@ -2153,12 +2155,12 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <EntityDeploy Include="Models\IMSModel.edmx">
+    <EntityDeploy Include="Models\Model.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>IMSModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\IMSModel.edmx.diagram">
-      <DependentUpon>IMSModel.edmx</DependentUpon>
+    <Content Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -2219,6 +2221,8 @@
     <Content Include="Views\Role\AddRole.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Sale\POS.cshtml" />
+    <Content Include="Views\Sale\ViewSaleHold.cshtml" />
+    <Content Include="Views\SaleCheck\DateCheck.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

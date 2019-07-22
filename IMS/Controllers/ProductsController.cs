@@ -13,7 +13,7 @@ namespace IMS.Controllers
 {
     public class ProductsController : Controller
     {
-        private IMSEntities4 db = new IMSEntities4();
+        private IMSEntities5 db = new IMSEntities5();
 
         // GET: Products
         public ActionResult Index()
@@ -66,7 +66,7 @@ namespace IMS.Controllers
             //imageModel.ProductImage = "~/App_File/ProductImages/" + fileName;
             //fileName = Path.Combine(Server.MapPath("~/App_File/ProductImages/"), fileName);
             //imageModel.ImageFile.SaveAs(fileName);
-            using (IMSEntities4 dba = new IMSEntities4())
+            using (IMSEntities5 dba = new IMSEntities5())
             {
                 dba.Products.Add(imageModel);
                 dba.SaveChanges();
@@ -158,7 +158,7 @@ namespace IMS.Controllers
 
         public JsonResult GetSearchValue(string search)
         {
-            IMSEntities4 db = new IMSEntities4();
+            IMSEntities5 db = new IMSEntities5();
             var allsearch = (from c in db.Products
                              where c.ProductName.StartsWith(search)
                              select new { c.ProductName, c.ProductId });

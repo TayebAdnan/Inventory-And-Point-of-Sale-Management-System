@@ -13,7 +13,7 @@ namespace IMS.Controllers
 {
     public class CeckController : Controller
     {
-        IMSEntities4 db = new IMSEntities4();
+        IMSEntities5 db = new IMSEntities5();
         // GET: Ceck
         public ActionResult Index()
 
@@ -91,10 +91,10 @@ namespace IMS.Controllers
                     ProductId =product.ProductId,
                     SaleDateTime = DateTime.Now,
                     
-                    SaleProductName = product.ProductName,
-                    SaleQuantity = 2,
-                    SalePrice = product.SellingPrice,
-                    TotalPrice = 2* (db.Products.FirstOrDefault(a=>a.ProductId==product.ProductId).SellingPrice),
+                    //SaleProductName = product.ProductName,
+                    //SaleQuantity = 2,
+                    //SalePrice = product.SellingPrice,
+                    //TotalPrice = 2* (db.Products.FirstOrDefault(a=>a.ProductId==product.ProductId).SellingPrice),
                 }
             );
             Session["OrderdProductList"] = Sales;
@@ -114,11 +114,11 @@ namespace IMS.Controllers
                     new Sale()
                     {
                         ProductId = item.ProductId,
-                        SaleProductName = item.SaleProductName,
-                        SaleDateTime = item.SaleDateTime,
-                        SalePrice = item.SalePrice,
-                        SaleQuantity = item.SaleQuantity,
-                        TotalPrice = item.TotalPrice,
+                        //SaleProductName = item.SaleProductName,
+                        //SaleDateTime = item.SaleDateTime,
+                        //SalePrice = item.SalePrice,
+                        //SaleQuantity = item.SaleQuantity,
+                        //TotalPrice = item.TotalPrice,
                         TransactionId = 3
                     }
                     );

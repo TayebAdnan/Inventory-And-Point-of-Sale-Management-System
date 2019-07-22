@@ -14,7 +14,7 @@ namespace IMS.Controllers
     {
         public ActionResult Index()
         {
-            IMSEntities4 entities = new IMSEntities4();
+            IMSEntities5 entities = new IMSEntities5();
             return View(entities.Roles);
         }
 

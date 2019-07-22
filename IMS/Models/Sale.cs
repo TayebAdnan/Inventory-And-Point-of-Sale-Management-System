@@ -24,12 +24,13 @@ namespace IMS.Models
         public int SaleId { get; set; }
         public int ProductId { get; set; }
         public int TransactionId { get; set; }
-        public string SaleProductName { get; set; }
+        public string InvoiceNumber { get; set; }
         public int CustomerId { get; set; }
         public Nullable<System.DateTime> SaleDateTime { get; set; }
-        public decimal SalePrice { get; set; }
-        public int SaleQuantity { get; set; }
-        public decimal TotalPrice { get; set; }
+        public decimal ItemTotal { get; set; }
+        public decimal Vat { get; set; }
+        public decimal Discount { get; set; }
+        public decimal TotalAmoun { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductSale> ProductSales { get; set; }

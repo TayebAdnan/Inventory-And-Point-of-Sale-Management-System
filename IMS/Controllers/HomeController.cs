@@ -34,7 +34,7 @@ namespace IMS.Controllers
         }
         public JsonResult GetProductByName(string search)
         {
-            IMSEntities4 db = new IMSEntities4();
+            IMSEntities5 db = new IMSEntities5();
             //var allsearch = (from c in db.Products
             //                 where c.ProductName.StartsWith(search)
             //                 select new { c.ProductName, c.ProductId });

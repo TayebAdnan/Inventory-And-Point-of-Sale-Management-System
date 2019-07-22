@@ -13,10 +13,10 @@ namespace IMS.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class IMSEntities4 : DbContext
+    public partial class IMSEntities5 : DbContext
     {
-        public IMSEntities4()
-            : base("name=IMSEntities4")
+        public IMSEntities5()
+            : base("name=IMSEntities5")
         {
         }
     

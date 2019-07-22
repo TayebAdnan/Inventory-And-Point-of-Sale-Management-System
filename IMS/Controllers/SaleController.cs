@@ -10,7 +10,7 @@ namespace IMS.Controllers
     public class SaleController : Controller
     {
         // GET: Sale
-        IMSEntities4 db = new IMSEntities4();
+        IMSEntities5 db = new IMSEntities5();
         public ActionResult Index()
         {
             return View();
@@ -21,56 +21,77 @@ namespace IMS.Controllers
             return View(products.ToList());
         }
 
-        public ActionResult GetProductInReceipt(int id, FormCollection form)
+        public ActionResult GetProductInReceipt(int id)
         {
-
+            FormCollection form = new FormCollection();
             int qty = Convert.ToInt32(form["test"]);
 
-            Sale sale = db.Sales.FirstOrDefault(a => a.ProductId == id);
+            ProductSale productSale = db.ProductSales.FirstOrDefault(a => a.ProductId == id);
             Product product = db.Products.FirstOrDefault(a => a.ProductId == id);
 
-            ViewBag.InvoiceNumber = db.Transactions.Max(a => a.InvoiceNumber)+1;
+           
 
-            Transaction itemTotal = new Transaction();
-
+            ViewBag.InvoiceNumber = (db.Transactions.Max(a => a.InvoiceNumber)+1).ToString();
             
-            List<Sale> Sales = (List<Sale>)Session["OrderdProductList"];
+            Sale itemTotal = new Sale();
 
-
-            if (Sales == null)
+            List<ProductSale> ProductSales = (List<ProductSale>)Session["ProductSale"];
+            if (ProductSales == null)
             {
-                Sales = new List<Sale>();
+                ProductSales = new List<ProductSale>();
             }
-            
-            Sales.Add
+
+            ProductSales.Add
             (
-                new Sale()
+                new ProductSale()
                 {
                     ProductId = product.ProductId,
-                    SaleDateTime = DateTime.Now,
-
-                    SaleProductName = product.ProductName,
-                    SaleQuantity = 2,
+                    SaleId = (db.Sales.Max(a => a.SaleId))+1,
                     SalePrice = product.SellingPrice,
-                    TotalPrice = 2 * (db.Products.FirstOrDefault(a => a.ProductId == product.ProductId).SellingPrice),
+                    SaleQuantity = 2,
+                    TotalPrice = 2 * product.SellingPrice,
+                    Product = db.Products.FirstOrDefault(a => a.ProductId == product.ProductId)
                 }
-            );
-            Session["OrderdProductList"] = Sales;
+                );
+            Session["ProductSale"] = ProductSales;
 
-
-            itemTotal.ItemTotal = Sales.Sum(a => a.TotalPrice);
+            itemTotal.ItemTotal = ProductSales.Sum(a => a.TotalPrice);
             ViewBag.ItemTotal = itemTotal.ItemTotal;
-
 
             decimal vat = System.Convert.ToDecimal(0.04);
             itemTotal.Vat = itemTotal.ItemTotal * vat;
             ViewBag.Vat = itemTotal.Vat;
 
-            itemTotal.TotalAmount = System.Convert.ToDecimal(itemTotal.ItemTotal + itemTotal.Vat);
-            ViewBag.TotalAmount = itemTotal.TotalAmount;
+            itemTotal.TotalAmoun = System.Convert.ToDecimal(itemTotal.ItemTotal + itemTotal.Vat);
+            ViewBag.TotalAmount = itemTotal.TotalAmoun;
 
-            
-           
+
+            List<Sale> sales = (List<Sale>)Session["Sale"];
+            if (sales == null)
+            {
+                sales = new List<Sale>();
+            }
+
+            sales.Add(
+                new Sale
+                {
+                    InvoiceNumber = ViewBag.InvoiceNumber,
+                    SaleDateTime = DateTime.Now,
+                    ItemTotal = ViewBag.ItemTotal,
+                    Vat = ViewBag.Vat,
+                    TotalAmoun = ViewBag.TotalAmount
+
+                });
+
+            Session["Sale"] = sales;
+
+            var total = db.Products.Where(m => m.ProductCode == "B").Sum(a => a.ProductQuantity);
+
+           var list= db.Products
+        .GroupBy(m => m.ProductCode)
+        .Select(g => g.Sum(c => c.ProductQuantity) )
+        .ToList();
+
             POS();
             return View("POS");
         }
@@ -80,39 +101,102 @@ namespace IMS.Controllers
         {
             
             List<Sale> sales = new List<Sale>();
-            sales = (List<Sale>)Session["OrderdProductList"];
-            Transaction itemTotal = new Transaction();
-            itemTotal.ItemTotal = 0;
+            sales = (List<Sale>)Session["Sale"];
+
+            Sale sale = new Sale();
             foreach (var item in sales)
             {
                 db.Sales.Add(
                     new Sale()
                     {
-                        ProductId = item.ProductId,
-                        SaleProductName = item.SaleProductName,
                         SaleDateTime = item.SaleDateTime,
-                        SalePrice = item.SalePrice,
-                        SaleQuantity = item.SaleQuantity,
-                        TotalPrice = item.TotalPrice,
-                        TransactionId = 3
+                        ItemTotal = item.ItemTotal,
+                        Vat = item.Vat,
+                        TotalAmoun = item.TotalAmoun,
+                        TransactionId = 3,
+                        InvoiceNumber = item.InvoiceNumber+1
+
                     }
                     );
-                db.Transactions.Add(
-                new Transaction()
-                {
-                    InvoiceNumber = ViewBag.InvoiceNumber,
-                    ItemTotal = ViewBag.ItemTotal
-                   
-                    
-                }
-                );
+                db.SaveChanges();
+                
+            }
+
+
+            List<ProductSale> productSales = new List<ProductSale>();
+            productSales =(List<ProductSale>)Session["ProductSale"];
+
+            foreach(var item in productSales)
+            {
+                db.ProductSales.Add(
+                    new ProductSale
+                    {
+                        ProductId = item.ProductId,
+                        SaleId = item.SaleId,
+                        SaleQuantity =item.SaleQuantity,
+                        SalePrice = item.SalePrice,
+                        TotalPrice =item.TotalPrice
+
+                    });
+                db.SaveChanges();
+            }
+            
+            Session.Remove("OrderdProductList");
+            POS();
+            return View("POS");
+        }
+
+
+        public ActionResult SaleHold()
+        {
+            List<Sale> sales = new List<Sale>();
+            sales = (List<Sale>)Session["OrderdProductList"];
+            List<Transaction> transactions = new List<Transaction>();
+
+            foreach (var item in sales)
+            {
+                db.SaleHolds.Add(
+                    new SaleHold()
+                    {
+                        ProductId = item.ProductId,
+                        //SaleHoldName = item.SaleProductName,
+                        //SaleHoldPrice = item.SalePrice,
+                        //SaleHoldDateTime = DateTime.Now,
+                        //SaleHoldQuantity = item.SaleQuantity,
+                        //SaleHoldTotalPrice = item.TotalPrice,
+
+                        SaleId = 8,
+                        TransactionId = 3
+
+                    }
+                    );
+                //db.Transactions.Add(
+                //new Transaction()
+                //{
+                //    InvoiceNumber = ViewBag.InvoiceNumber,
+                //    ItemTotal = ViewBag.ItemTotal,
+                //    Vat = ViewBag.Vat
+
+                //}
+                //);
                 db.SaveChanges();
             }
 
-            
-
             Session.Remove("OrderdProductList");
             POS();
+            return View("POS");
+        }
+
+
+        public ActionResult ViewSaleHold()
+        {
+            
+            return View(db.SaleHolds);
+        }
+
+        public ActionResult Unhold()
+        {
+            GetProductInReceipt(2);
             return View("POS");
         }
 

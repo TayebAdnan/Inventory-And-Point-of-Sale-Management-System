@@ -17,8 +17,9 @@ namespace IMS.Models
         public int ProductSaleId { get; set; }
         public int ProductId { get; set; }
         public int SaleId { get; set; }
-        public decimal SellingPrice { get; set; }
-        public Nullable<int> ProductQuantity { get; set; }
+        public decimal SaleQuantity { get; set; }
+        public decimal SalePrice { get; set; }
+        public decimal TotalPrice { get; set; }
     
         public virtual Product Product { get; set; }
         public virtual Sale Sale { get; set; }

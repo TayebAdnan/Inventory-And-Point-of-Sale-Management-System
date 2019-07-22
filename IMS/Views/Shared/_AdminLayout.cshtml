@@ -32,12 +32,11 @@
     <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
         <div class="container-fluid">
             <!-- Toggler -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+           
             <!-- Brand -->
             <a class="navbar-brand pt-0" href="#">
-                <img style="width:200px"   src="~/Content/img/brand/blue.png" class="navbar-brand-img" alt="...">
+                <img style="width:200px"   src="~/Content/img/brand/CMI.png" class="navbar-brand-img" alt="...">
+            <h4>CaveMan International</h4>
             </a>
             <!-- User -->
            
@@ -113,32 +112,11 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./examples/register.html">
-                            <i class="ni ni-circle-08 text-pink"></i> Register
+                            <i class="ni ni-circle-08 text-pink"></i> Logout
                         </a>
                     </li>
                 </ul>
-                <!-- Divider -->
-                <hr class="my-3">
-                <!-- Heading -->
-                <h6 class="navbar-heading text-muted">Documentation</h6>
-                <!-- Navigation -->
-                <ul class="navbar-nav mb-md-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
-                            <i class="ni ni-spaceship"></i> Getting started
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
-                            <i class="ni ni-palette"></i> Foundation
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
-                            <i class="ni ni-ui-04"></i> Components
-                        </a>
-                    </li>
-                </ul>
+               
             </div>
         </div>
     </nav>
@@ -150,7 +128,7 @@
                 <!-- Brand -->
                 <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="@Url.Action("Index","Home")">Dashboard</a>
                 <!-- Form -->
-                <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+                @*<form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
                     <div class="form-group mb-0">
                         <div class="input-group input-group-alternative">
                             <div class="input-group-prepend">
@@ -159,7 +137,7 @@
                             <input class="form-control" placeholder="Search" type="text">
                         </div>
                     </div>
-                </form>
+                </form>*@
                 <!-- User -->
                 <ul class="navbar-nav align-items-center d-none d-md-flex">
                     <li class="nav-item dropdown">
@@ -167,12 +145,15 @@
                         <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="media align-items-center">
                                 <span class="avatar avatar-sm rounded-circle">
-                                    <img alt="Image placeholder" src="~/Content/img/theme/team-4-800x800.jpg">
+                                    <img alt="Image placeholder" src="~/Content/img/theme/a.png">
                                 </span>
                                 <div class="media-body ml-2 d-none d-lg-block">
                                     @*<span class="mb-0 text-sm  font-weight-bold"><b>@Session["UserName"].ToString()</b>
                                     
                                     </span>*@
+                                     <span class="mb-0 text-sm  font-weight-bold"><b>Adnan</b>
+                                    
+                                    </span>
                                 </div>
                             </div>
                         </a>
@@ -188,14 +169,7 @@
                                 <i class="ni ni-settings-gear-65"></i>
                                 <span>Settings</span>
                             </a>
-                            <a href="./examples/profile.html" class="dropdown-item">
-                                <i class="ni ni-calendar-grid-58"></i>
-                                <span>Activity</span>
-                            </a>
-                            <a href="./examples/profile.html" class="dropdown-item">
-                                <i class="ni ni-support-16"></i>
-                                <span>Support</span>
-                            </a>
+                            
                             <div class="dropdown-divider"></div>
                             <a href="@Url.Action("SignOut","Account")" class="dropdown-item">
                                 <i class="ni ni-user-run"></i>

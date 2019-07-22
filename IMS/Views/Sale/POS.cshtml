@@ -151,14 +151,14 @@
 
                         <tbody>
 
-                            @if (Session["OrderdProductList"] != null)
+                            @if (Session["ProductSale"] != null)
                             {
-                                foreach (var sellProduct in (IEnumerable<Sale>)Session["OrderdProductList"])
+                                foreach (var sellProduct in (IEnumerable<ProductSale>)Session["ProductSale"])
 
 
                                 {
                                     <tr>
-                                        <td class="justify-content-around"><em>@sellProduct.SaleProductName</em></td>
+                                        <td class="justify-content-around"><em>@sellProduct.Product.ProductName</em></td>
                                         <td><em>@sellProduct.SaleQuantity</em></td>
                                         <td class="justify-content-around"><em>@sellProduct.SalePrice</em></td>
                                         <td class="justify-content-around"><em>@sellProduct.TotalPrice</em></td>
@@ -183,7 +183,7 @@
                                 <td>   </td>
                                 <td>   </td>
                                 <td class="text-right"><h4><strong>Discount </strong></h4></td>
-                                <td class="text-center text-danger"><h4><strong>$31.53</strong></h4></td>
+                                <td class="text-center text-danger"><h4><strong>@ViewBag.count</strong></h4></td>
                             </tr>
                             <tr>
                                 <td>   </td>
@@ -208,18 +208,14 @@
 
                 <div class="row">
                     <div class="col-lg-4">
-                        <button type="button" class="btn btn-success btn-lg btn-block">
-                            View SaleHold   <span class="glyphicon glyphicon-chevron-right"></span>
-                        </button>
+                        <a href='@Url.Action("ViewSaleHold", "Sale")' class="btn btn-success btn-lg btn-block">View Sale Hold </a>  <span class="glyphicon glyphicon-chevron-right"></span>
                     </div>
                     <div class="col-lg-4">
-                        <button type="button" class="btn btn-success btn-lg btn-block">
-                            SaleHold   <span class="glyphicon glyphicon-chevron-right"></span>
-                        </button>
+                        <a href='@Url.Action("SaleHold", "Sale")' class="btn btn-success btn-lg btn-block">Sale Hold </a>  <span class="glyphicon glyphicon-chevron-right"></span>
                     </div>
                     <div class="col-lg-4">
 
-                        <a href='@Url.Action("Sale", "Sale")'> Pay Now </a>  <span class="glyphicon glyphicon-chevron-right"></span>
+                        <a href='@Url.Action("Sale", "Sale")' class="btn btn-success btn-lg btn-block">Pay Now </a>  <span class="glyphicon glyphicon-chevron-right"></span>
 
 
                     </div>

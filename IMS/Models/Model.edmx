@@ -75,8 +75,9 @@
           <Property Name="ProductSaleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="SaleId" Type="int" Nullable="false" />
-          <Property Name="SellingPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ProductQuantity" Type="int" />
+          <Property Name="SaleQuantity" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SalePrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -92,12 +93,13 @@
           <Property Name="SaleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="TransactionId" Type="int" Nullable="false" />
-          <Property Name="SaleProductName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="SaleDateTime" Type="datetime" />
-          <Property Name="SalePrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="SaleQuantity" Type="int" Nullable="false" />
-          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ItemTotal" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Vat" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TotalAmoun" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="SaleHold">
           <Key>
@@ -457,8 +459,9 @@
           <Property Name="ProductSaleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="SaleId" Type="Int32" Nullable="false" />
-          <Property Name="SellingPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ProductQuantity" Type="Int32" />
+          <Property Name="SaleQuantity" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SalePrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ProductSale_Product" FromRole="ProductSale" ToRole="Product" />
           <NavigationProperty Name="Sale" Relationship="Self.FK_ProductSale_Sale" FromRole="ProductSale" ToRole="Sale" />
         </EntityType>
@@ -477,15 +480,16 @@
           <Property Name="SaleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="TransactionId" Type="Int32" Nullable="false" />
-          <Property Name="SaleProductName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="SaleDateTime" Type="DateTime" Precision="3" />
-          <Property Name="SalePrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="SaleQuantity" Type="Int32" Nullable="false" />
-          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Vat" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Discount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="TotalAmoun" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="ProductSales" Relationship="Self.FK_ProductSale_Sale" FromRole="Sale" ToRole="ProductSale" />
           <NavigationProperty Name="Transaction" Relationship="Self.FK_Sale_Transaction" FromRole="Sale" ToRole="Transaction" />
           <NavigationProperty Name="SaleHolds" Relationship="Self.FK_SaleHold_Sale" FromRole="Sale" ToRole="SaleHold" />
+          <Property Name="ItemTotal" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="SaleHold">
           <Key>
@@ -493,16 +497,16 @@
           </Key>
           <Property Name="SaleHoldId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="SaleHoldName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SaleHoldDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="SaleHoldQuantity" Type="Int32" Nullable="false" />
+          <Property Name="SaleHoldPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SaleHoldTotalPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="SaleId" Type="Int32" Nullable="false" />
           <Property Name="TransactionId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Sale" Relationship="Self.FK_SaleHold_Sale" FromRole="SaleHold" ToRole="Sale" />
           <NavigationProperty Name="Transaction" Relationship="Self.FK_SaleHold_Transaction" FromRole="SaleHold" ToRole="Transaction" />
-          <Property Name="SaleHoldName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SaleHoldPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="SaleHoldTotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Size">
           <Key>
@@ -695,7 +699,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="IMSEntities4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="IMSEntities5" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Adjustments" EntityType="Self.Adjustment" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Colors" EntityType="Self.Color" />
@@ -768,7 +772,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="IMSModelStoreContainer" CdmEntityContainer="IMSEntities4">
+        <EntityContainerMapping StorageEntityContainer="IMSModelStoreContainer" CdmEntityContainer="IMSEntities5">
           <EntitySetMapping Name="Adjustments">
             <EntityTypeMapping TypeName="IMSModel.Adjustment">
               <MappingFragment StoreEntitySet="Adjustment">
@@ -845,8 +849,9 @@
                 <ScalarProperty Name="ProductSaleId" ColumnName="ProductSaleId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="SaleId" ColumnName="SaleId" />
-                <ScalarProperty Name="SellingPrice" ColumnName="SellingPrice" />
-                <ScalarProperty Name="ProductQuantity" ColumnName="ProductQuantity" />
+                <ScalarProperty Name="SaleQuantity" ColumnName="SaleQuantity" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -861,29 +866,30 @@
           <EntitySetMapping Name="Sales">
             <EntityTypeMapping TypeName="IMSModel.Sale">
               <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="ItemTotal" ColumnName="ItemTotal" />
                 <ScalarProperty Name="SaleId" ColumnName="SaleId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
-                <ScalarProperty Name="SaleProductName" ColumnName="SaleProductName" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="SaleDateTime" ColumnName="SaleDateTime" />
-                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
-                <ScalarProperty Name="SaleQuantity" ColumnName="SaleQuantity" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Vat" ColumnName="Vat" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="TotalAmoun" ColumnName="TotalAmoun" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SaleHolds">
             <EntityTypeMapping TypeName="IMSModel.SaleHold">
               <MappingFragment StoreEntitySet="SaleHold">
-                <ScalarProperty Name="SaleHoldTotalPrice" ColumnName="SaleHoldTotalPrice" />
-                <ScalarProperty Name="SaleHoldPrice" ColumnName="SaleHoldPrice" />
-                <ScalarProperty Name="SaleHoldName" ColumnName="SaleHoldName" />
                 <ScalarProperty Name="SaleHoldId" ColumnName="SaleHoldId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SaleHoldName" ColumnName="SaleHoldName" />
                 <ScalarProperty Name="SaleHoldDateTime" ColumnName="SaleHoldDateTime" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="SaleHoldQuantity" ColumnName="SaleHoldQuantity" />
+                <ScalarProperty Name="SaleHoldPrice" ColumnName="SaleHoldPrice" />
+                <ScalarProperty Name="SaleHoldTotalPrice" ColumnName="SaleHoldTotalPrice" />
                 <ScalarProperty Name="SaleId" ColumnName="SaleId" />
                 <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
               </MappingFragment>
@@ -900,8 +906,8 @@
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="IMSModel.Transaction">
               <MappingFragment StoreEntitySet="Transaction">
-                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
                 <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
                 <ScalarProperty Name="ItemTotal" ColumnName="ItemTotal" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="Vat" ColumnName="Vat" />
