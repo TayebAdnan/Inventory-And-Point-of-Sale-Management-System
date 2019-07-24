@@ -93,7 +93,7 @@
           <Property Name="SaleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="TransactionId" Type="int" Nullable="false" />
-          <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="InvoiceNumber" Type="int" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="SaleDateTime" Type="datetime" />
           <Property Name="ItemTotal" Type="decimal" Precision="18" Scale="0" />
@@ -303,6 +303,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="proc_name" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fromdate" Type="datetime" Mode="In" />
+          <Parameter Name="todate" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="IMSModelStoreContainer">
           <EntitySet Name="Adjustment" EntityType="Self.Adjustment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
@@ -480,7 +484,7 @@
           <Property Name="SaleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="TransactionId" Type="Int32" Nullable="false" />
-          <Property Name="InvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="Int32" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <Property Name="SaleDateTime" Type="DateTime" Precision="3" />
           <Property Name="Vat" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
@@ -766,6 +770,18 @@
             <End Role="Transaction" EntitySet="Transactions" />
             <End Role="SaleHold" EntitySet="SaleHolds" />
           </AssociationSet>
+          <FunctionImport Name="proc_name" ReturnType="Collection(Decimal)">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetDates" EntitySet="Sales" ReturnType="Collection(IMSModel.Sale)">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="datedata" EntitySet="Sales" ReturnType="Collection(IMSModel.Sale)">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -929,6 +945,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_name" FunctionName="IMSModel.Store.proc_name" />
+          <FunctionImportMapping FunctionImportName="GetDates" FunctionName="IMSModel.Store.proc_name" />
+          <FunctionImportMapping FunctionImportName="datedata" FunctionName="IMSModel.Store.proc_name" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

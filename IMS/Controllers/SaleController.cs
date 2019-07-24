@@ -30,8 +30,7 @@ namespace IMS.Controllers
             Product product = db.Products.FirstOrDefault(a => a.ProductId == id);
 
            
-
-            ViewBag.InvoiceNumber = (db.Transactions.Max(a => a.InvoiceNumber)+1).ToString();
+            ViewBag.InvoiceNumber = (db.Sales.Max(a => a.InvoiceNumber)) + 1; 
             
             Sale itemTotal = new Sale();
 
@@ -85,6 +84,7 @@ namespace IMS.Controllers
 
             Session["Sale"] = sales;
 
+            //Find the total quantity
             var total = db.Products.Where(m => m.ProductCode == "B").Sum(a => a.ProductQuantity);
 
            var list= db.Products
@@ -114,7 +114,7 @@ namespace IMS.Controllers
                         Vat = item.Vat,
                         TotalAmoun = item.TotalAmoun,
                         TransactionId = 3,
-                        InvoiceNumber = item.InvoiceNumber+1
+                        InvoiceNumber = item.InvoiceNumber
 
                     }
                     );
@@ -141,7 +141,8 @@ namespace IMS.Controllers
                 db.SaveChanges();
             }
             
-            Session.Remove("OrderdProductList");
+            Session.Remove("Sale");
+            Session.Remove("ProductSale");
             POS();
             return View("POS");
         }
