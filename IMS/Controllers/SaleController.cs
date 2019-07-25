@@ -148,6 +148,22 @@ namespace IMS.Controllers
         }
 
 
+        public ActionResult DeleteFromReceipt(int id)
+        {
+
+            ProductSale productSale = db.ProductSales.FirstOrDefault(a => a.ProductId == id);
+            List<ProductSale> removeproduct =new List < ProductSale >();
+            removeproduct = (List<ProductSale>)Session["ProductSale"];
+
+            var removableId = removeproduct.Find(a => a.ProductId == id);
+
+            removeproduct.Remove(removableId);
+            Session["ProductSale"] = removeproduct;
+
+            POS();
+            return View("POS");
+        }
+
         public ActionResult SaleHold()
         {
             List<Sale> sales = new List<Sale>();

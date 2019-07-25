@@ -163,7 +163,8 @@
                                         <td class="justify-content-around"><em>@sellProduct.SalePrice</em></td>
                                         <td class="justify-content-around"><em>@sellProduct.TotalPrice</em></td>
                                         <td>
-                                            <input type="button" onclick="Remove(this)" />
+                                           @* <input type="button" onclick="Remove(this)" />*@
+                                            <a href="@Url.Action("DeleteFromReceipt", "Sale", new { id = sellProduct.ProductId})">+</a>
 
                                         </td>
 

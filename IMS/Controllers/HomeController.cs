@@ -11,7 +11,8 @@ namespace IMS.Controllers
     {
         public ActionResult Index()
         {
-            Session.Remove("OrderdProductList");
+            Session.Remove("ProductSale");
+            Session.Remove("Sale");
             return View();
         }
 
