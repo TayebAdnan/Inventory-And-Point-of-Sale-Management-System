@@ -26,7 +26,7 @@ namespace IMS.Models
         public int TransactionId { get; set; }
         public int InvoiceNumber { get; set; }
         public int CustomerId { get; set; }
-        public Nullable<System.DateTime> SaleDateTime { get; set; }
+        public DateTime SaleDateTime { get; set; }
         public decimal ItemTotal { get; set; }
         public decimal Vat { get; set; }
         public decimal Discount { get; set; }

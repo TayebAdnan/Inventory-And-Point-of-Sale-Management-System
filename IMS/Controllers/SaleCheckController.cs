@@ -18,7 +18,7 @@ namespace IMS.Controllers
        
         public ActionResult Index(DateTime? start, DateTime? end)
         {
-            IMSEntities5 db = new IMSEntities5();
+            
             var data=db.Sales.SqlQuery("select * from [dbo].[Sale] where SaleDateTime between '" + start + "'and'" + end + "'").ToList();
             
             return View(data);
@@ -28,18 +28,15 @@ namespace IMS.Controllers
             return View();
         }
 
-        public ActionResult Data()
+        public ActionResult Data(DateTime start, DateTime end)
         {
-            IMSEntities5 db = new IMSEntities5();
+            
 
             List<Sale> list = new List<Sale>();
 
-            DateTime StartDate = Convert.ToDateTime("2019-07-17 13:59:32.400");
-            DateTime EndDate = Convert.ToDateTime("2019-07-22 13:41:38.840");
+            list=db.Sales.Where(x => x.SaleDateTime >= start && x.SaleDateTime <= end).ToList();
 
-            list.Where(x => x.SaleDateTime >= StartDate && x.SaleDateTime <= EndDate);
-
-            return View();
+            return View(list);
         }
 
 

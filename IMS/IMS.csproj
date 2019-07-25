@@ -2225,6 +2225,7 @@
     <Content Include="Views\SaleCheck\DateCheck.cshtml" />
     <Content Include="Views\SaleCheck\DateReceive.cshtml" />
     <Content Include="Views\SaleCheck\Index.cshtml" />
+    <Content Include="Views\SaleCheck\Data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

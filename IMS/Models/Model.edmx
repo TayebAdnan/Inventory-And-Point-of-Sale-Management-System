@@ -95,7 +95,7 @@
           <Property Name="TransactionId" Type="int" Nullable="false" />
           <Property Name="InvoiceNumber" Type="int" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
-          <Property Name="SaleDateTime" Type="datetime" />
+          <Property Name="SaleDateTime" Type="datetime" Nullable="false" />
           <Property Name="ItemTotal" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Vat" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Discount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
@@ -486,7 +486,7 @@
           <Property Name="TransactionId" Type="Int32" Nullable="false" />
           <Property Name="InvoiceNumber" Type="Int32" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="SaleDateTime" Type="DateTime" Precision="3" />
+          <Property Name="SaleDateTime" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="Vat" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Discount" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="TotalAmoun" Type="Decimal" Precision="18" Scale="0" Nullable="false" />

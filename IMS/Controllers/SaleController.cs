@@ -1,6 +1,7 @@
 ﻿using IMS.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -118,7 +119,10 @@ namespace IMS.Controllers
 
                     }
                     );
+
                 db.SaveChanges();
+                
+                
                 
             }
 
@@ -139,6 +143,9 @@ namespace IMS.Controllers
 
                     });
                 db.SaveChanges();
+
+
+                db.Database.ExecuteSqlCommand("UPDATE [dbo].[Product] SET ProductQuantity = ProductQuantity-1 WHERE ProductId = '" + item.ProductId + "'");
             }
             
             Session.Remove("Sale");

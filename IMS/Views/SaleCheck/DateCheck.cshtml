@@ -8,8 +8,12 @@
     </div>
 <h2>DateCheck</h2>
 
-<form id='your-range-form' action='@Url.Action("Data","SaleCheckController")' method='post'>
-    <input id='from' type="date" name='fromDate' />
-    <input id='to' type="date" name='toDate' />
-    <input type='submit' value='Set Range' />
-</form>
+<p>
+    @using (Html.BeginForm("Data", "SaleCheck", FormMethod.Get))
+    {
+        <input type="date" name="start" />
+        <input type="date" name="end" />
+        <input type="submit" name="submit" />
+
+    }
+</p>
