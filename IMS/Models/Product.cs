@@ -20,6 +20,7 @@ namespace IMS.Models
             this.Adjustments = new HashSet<Adjustment>();
             this.ManufactureProducts = new HashSet<ManufactureProduct>();
             this.ProductSales = new HashSet<ProductSale>();
+            this.Sales = new HashSet<Sale>();
         }
     
         public int ProductId { get; set; }
@@ -45,5 +46,8 @@ namespace IMS.Models
         public virtual Size Size { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductSale> ProductSales { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sale> Sales { get; set; }
     }
 }

@@ -138,6 +138,7 @@
     <Compile Include="Controllers\CeckController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SaleCheckController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
@@ -2226,6 +2227,8 @@
     <Content Include="Views\SaleCheck\DateReceive.cshtml" />
     <Content Include="Views\SaleCheck\Index.cshtml" />
     <Content Include="Views\SaleCheck\Data.cshtml" />
+    <Content Include="Views\Report\GetDateRange.cshtml" />
+    <Content Include="Views\Report\SaleReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

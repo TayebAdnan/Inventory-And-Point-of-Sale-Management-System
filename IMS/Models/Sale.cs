@@ -31,7 +31,9 @@ namespace IMS.Models
         public decimal Vat { get; set; }
         public decimal Discount { get; set; }
         public decimal TotalAmoun { get; set; }
-    
+
+        public virtual Product Product { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductSale> ProductSales { get; set; }
         public virtual Transaction Transaction { get; set; }

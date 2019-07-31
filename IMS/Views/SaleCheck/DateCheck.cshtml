@@ -9,11 +9,5 @@
 <h2>DateCheck</h2>
 
 <p>
-    @using (Html.BeginForm("Data", "SaleCheck", FormMethod.Get))
-    {
-        <input type="date" name="start" />
-        <input type="date" name="end" />
-        <input type="submit" name="submit" />
-
-    }
+    @ViewBag.TodaysProduct
 </p>

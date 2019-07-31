@@ -25,6 +25,7 @@
 
 
     @Styles.Render("~/template/css")
+
 </head>
 
 <body>
@@ -80,11 +81,26 @@
                             <i class="ni ni-tv-2 text-primary"></i> Dashboard
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index","Products")">
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fab fa-product-hunt"></i> Product
                         </a>
+
+                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                            <a href="@Url.Action("Create","Products")" class="dropdown-item">
+                                <i class="ni ni-single-02"></i>
+                                <span>Add New Product</span>
+                            </a>
+                            <a href="@Url.Action("Index","Products")" class="dropdown-item">
+                                <i class="ni ni-single-02"></i>
+                                <span>Product List</span>
+                            </a>
+                           
+                        </div>
+
                     </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="./examples/maps.html">
                             <i class="fas fa-box-open"></i>Sales

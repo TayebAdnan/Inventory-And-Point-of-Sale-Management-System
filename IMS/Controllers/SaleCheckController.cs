@@ -25,43 +25,9 @@ namespace IMS.Controllers
         }
         public ActionResult DateCheck()
         {
-            return View();
-        }
 
-        public ActionResult Data(DateTime start, DateTime end)
-        {
-            
-
-            List<Sale> list = new List<Sale>();
-
-            list=db.Sales.Where(x => x.SaleDateTime >= start && x.SaleDateTime <= end).ToList();
-            
-
-            return View(list);
-        }
-
-
-        //public ActionResult DateReceive(string StartDate = "", string FinishDate = "")
-        //{
-
-        //    DateTime stDate;
-        //    DateTime fnDate;
-
-        //    if (StartDate != string.Empty && FinishDate != string.Empty)
-        //    {
-        //        stDate = DateTime.Parse(StartDate);
-        //        fnDate = DateTime.Parse(FinishDate);
-        //        var cal = cal.Where(x => x.StartDate >= stDate && x.FinishDate <= fnDate);
-        //    }
-        //    return View();
-        //}
-
-        public ActionResult date(DateTime? id)
-        {
-            //string sql = "proc_name";
-            
-            //cmd.Parameters.AddWithValue("@fromdate", Convert.ToDateTime(txtfromdate.text.trim()));
-            //cmd.Parameters.AddWithValue("@todate", Convert.ToDateTime(txttodate.text.trim()));
+            var count = db.Products.Where(p => p.ProductDate == DateTime.Today).Sum(p => p.ProductQuantity);
+            ViewBag.TodaysProduct = count;
             return View();
         }
 

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "DateCheck";
+}
+
+
+<div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+</div>
+<h2>DateCheck</h2>
+
+<p>
+    @using (Html.BeginForm("SaleReport", "Report", FormMethod.Get))
+    {
+        <input type="date" name="start" />
+        <input type="date" name="end" />
+        <input type="submit" name="submit" />
+
+    }
+</p>

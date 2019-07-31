@@ -32,6 +32,7 @@
         <AssociationConnector Association="IMSModel.FK_Sale_Transaction" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_SaleHold_Sale" ManuallyRouted="false" />
         <AssociationConnector Association="IMSModel.FK_SaleHold_Transaction" ManuallyRouted="false" />
+        <AssociationConnector Association="IMSModel.FK_Sale_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

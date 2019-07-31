@@ -255,6 +255,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sale_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sale_Transaction">
           <End Role="Transaction" Type="Self.Transaction" Multiplicity="1" />
           <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
@@ -358,6 +370,10 @@
             <End Role="Sale" EntitySet="Sale" />
             <End Role="ProductSale" EntitySet="ProductSale" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sale_Product" Association="Self.FK_Sale_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sale_Transaction" Association="Self.FK_Sale_Transaction">
             <End Role="Transaction" EntitySet="Transaction" />
             <End Role="Sale" EntitySet="Sale" />
@@ -455,6 +471,7 @@
           <NavigationProperty Name="ManufactureProducts" Relationship="Self.FK_ManufactureProduct_Product" FromRole="Product" ToRole="ManufactureProduct" />
           <NavigationProperty Name="Size" Relationship="Self.FK_Product_Size" FromRole="Product" ToRole="Size" />
           <NavigationProperty Name="ProductSales" Relationship="Self.FK_ProductSale_Product" FromRole="Product" ToRole="ProductSale" />
+          <NavigationProperty Name="Sales" Relationship="IMSModel.FK_Sale_Product" FromRole="Product" ToRole="Sale" />
         </EntityType>
         <EntityType Name="ProductSale">
           <Key>
@@ -494,6 +511,7 @@
           <NavigationProperty Name="Transaction" Relationship="Self.FK_Sale_Transaction" FromRole="Sale" ToRole="Transaction" />
           <NavigationProperty Name="SaleHolds" Relationship="Self.FK_SaleHold_Sale" FromRole="Sale" ToRole="SaleHold" />
           <Property Name="ItemTotal" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Product" Relationship="IMSModel.FK_Sale_Product" FromRole="Sale" ToRole="Product" />
         </EntityType>
         <EntityType Name="SaleHold">
           <Key>
@@ -782,7 +800,23 @@
             <Parameter Name="fromdate" Mode="In" Type="DateTime" />
             <Parameter Name="todate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <AssociationSet Name="FK_Sale_Product" Association="IMSModel.FK_Sale_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Sale_Product">
+          <End Type="IMSModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="IMSModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

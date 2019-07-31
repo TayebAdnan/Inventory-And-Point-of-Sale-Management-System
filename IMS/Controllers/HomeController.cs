@@ -9,10 +9,13 @@ namespace IMS.Controllers
 {
     public class HomeController : Controller
     {
+        IMSEntities5 db = new IMSEntities5();
         public ActionResult Index()
         {
             Session.Remove("ProductSale");
             Session.Remove("Sale");
+            var count = db.Products.Where(p => p.ProductDate == DateTime.Today).Sum(p => p.ProductQuantity);
+            ViewBag.TodaysProduct = count;
             return View();
         }
 

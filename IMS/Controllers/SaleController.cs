@@ -14,7 +14,8 @@ namespace IMS.Controllers
         IMSEntities5 db = new IMSEntities5();
         public ActionResult Index()
         {
-            return View();
+            var sales = db.Sales.Include(p => p.ProductSales);
+                return View(sales.ToList());
         }
         public ActionResult POS()
         {
