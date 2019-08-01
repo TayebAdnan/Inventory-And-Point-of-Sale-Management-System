@@ -1,0 +1,25 @@
+﻿@model IMS.Models.Product
+
+@{
+    ViewBag.Title = "InventoryView";
+}
+
+    <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+    </div>
+<table>
+    <tr>
+        <th>Product Name</th>
+        <th> Color</th>
+        <th> Size</th>
+        <th> Available Quantity</th>
+    </tr>
+
+<tbody>
+    <tr>
+        <td>@ViewBag.ProductName</td>
+        <td>@ViewBag.Color</td>
+        <td>@ViewBag.Size</td>
+        <td>@ViewBag.InventoryCount</td>
+    </tr>
+</tbody>
+</table>

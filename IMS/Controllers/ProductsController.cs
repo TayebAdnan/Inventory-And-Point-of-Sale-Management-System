@@ -23,8 +23,6 @@ namespace IMS.Controllers
             return View(products.ToList());
             
             
-
-            //return Json(new { data = products.ToList() }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Products/Details/5

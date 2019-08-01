@@ -1,6 +1,7 @@
 ﻿using IMS.Models;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,10 +19,12 @@ namespace IMS.Controllers
 
         public ActionResult SaleReport(DateTime start, DateTime end)
         {
+
             List<Sale> list = new List<Sale>();
 
             list = db.Sales.Where(x => x.SaleDateTime >= start && x.SaleDateTime <= end).ToList();
-
+           
+            
             return View(list);
         }
 

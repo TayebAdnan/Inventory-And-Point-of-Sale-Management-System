@@ -137,6 +137,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CeckController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -2229,6 +2230,8 @@
     <Content Include="Views\SaleCheck\Data.cshtml" />
     <Content Include="Views\Report\GetDateRange.cshtml" />
     <Content Include="Views\Report\SaleReport.cshtml" />
+    <Content Include="Views\Inventory\Inventory.cshtml" />
+    <Content Include="Views\Inventory\InventoryView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

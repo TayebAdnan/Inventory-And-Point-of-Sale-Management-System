@@ -12,14 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ProductId)
+            @Html.DisplayNameFor(model => model.Product.ProductName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TransactionId)
-        </th>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.CustomerId)
+            @Html.DisplayNameFor(model => model.InvoiceNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.SaleDateTime)
@@ -43,15 +39,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductId)
+                @Html.DisplayFor(modelItem => item.Product.ProductName)
             </td>
-           
+
             <td>
                 @Html.DisplayFor(modelItem => item.InvoiceNumber)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerId)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.SaleDateTime)
             </td>
@@ -67,7 +61,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TotalAmoun)
             </td>
-           
+
         </tr>
     }
 
