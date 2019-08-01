@@ -33,7 +33,7 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Inventory</h5>
-                                    <span class="h2 font-weight-bold mb-0">2 Items</span>
+                                    <span class="h2 font-weight-bold mb-0">@ViewBag.countInventory item</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -168,7 +168,7 @@
                     // Change type to "bar", "area", "spline", "pie",etc.
                     type: "column",
                     dataPoints: [
-                        { label: "Shirt", y: 10 },
+                        { label: "Shirt", y: @Session["Shirt"] },
                         { label: "T-Shirt", y: 15 },
                         { label: "Jeans Pant", y: 25 },
                         { label: "Gabadin Pant", y: 30 },

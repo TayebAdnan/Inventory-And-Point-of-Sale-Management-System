@@ -10,42 +10,56 @@ namespace IMS.Controllers
     public class HomeController : Controller
     {
         IMSEntities5 db = new IMSEntities5();
+
+
+        public ActionResult InventoryAlert()
+        {
+            int Inventorycount = 0;
+
+            var sh_b_xl_001 = db.Products.Where(p => p.ProductCode == "sh-b-xl-001").Sum(p => p.ProductQuantity);
+            var sh_b_l_001 = db.Products.Where(p => p.ProductCode == "sh-b-l-001").Sum(p => p.ProductQuantity);
+            var sh_b_m_001 = db.Products.Where(p => p.ProductCode == "sh-b-m-001").Sum(p => p.ProductQuantity);
+            var sh_b_s_001 = db.Products.Where(p => p.ProductCode == "sh-b-m-001").Sum(p => p.ProductQuantity);
+            var alert = db.Products.FirstOrDefault(p => p.ProductCode == "sh-b-xl-001").AlertQuantity;
+
+            if (sh_b_xl_001 >= alert)
+            {
+                ViewBag.alert = "Xl size Blue Shirt is in alerming rate";
+                Inventorycount++;
+            }
+
+            ViewBag.countInventory = Inventorycount;
+
+            return View();
+        }
+
         public ActionResult Index()
         {
             Session.Remove("ProductSale");
             Session.Remove("Sale");
+
             var count = db.Products.Where(p => p.ProductDate == DateTime.Today).Sum(p => p.ProductQuantity);
             ViewBag.TodaysProduct = count;
-            return View();
-        }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            InventoryAlert();
+
+            BarChart();
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult BarChart()
         {
-            ViewBag.Message = "Your contact page.";
-
+            try { 
+            Session["Shirt"] = db.ProductSales.Where(a => (a.Product.ProductName == "Shirt") && (a.Sale.SaleDateTime == DateTime.Today)).Sum(a => a.SaleQuantity);
+            }
+            catch
+            {
+                Session["Shirt"] = 0;
+            }
             return View();
         }
-        public ActionResult JJA(string search)
-        {
-            return View();
-        }
-        public JsonResult GetProductByName(string search)
-        {
-            IMSEntities5 db = new IMSEntities5();
-            //var allsearch = (from c in db.Products
-            //                 where c.ProductName.StartsWith(search)
-            //                 select new { c.ProductName, c.ProductId });
-            var products = db.Products.Where(a => a.ProductName.Contains(search)).ToList();
-            return new JsonResult { Data = products, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
-            
-        }
+       
 
     }
 }

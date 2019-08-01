@@ -38,21 +38,6 @@ namespace IMS.Controllers
         {
             return View();
         }
-        public ActionResult InventoryAlert()
-        {
-            
-            var sh_b_xl_001 = db.Products.Where(p => p.ProductCode == "sh-b-xl-001").Sum(p => p.ProductQuantity);
-            var sh_b_l_001 = db.Products.Where(p => p.ProductCode == "sh-b-l-001").Sum(p => p.ProductQuantity);
-            var sh_b_m_001 = db.Products.Where(p => p.ProductCode == "sh-b-m-001").Sum(p => p.ProductQuantity);
-            var sh_b_s_001 = db.Products.Where(p => p.ProductCode == "sh-b-m-001").Sum(p => p.ProductQuantity);
-            var alert = db.Products.FirstOrDefault(p => p.ProductCode == "sh-b-xl-001").AlertQuantity;
-            
-            if(sh_b_xl_001 >= alert)
-            {
-                ViewBag.alert = "Xl size Blue Shirt is in alerming rate";
-                
-            }
-            return View();
-        }
+       
     }
 }

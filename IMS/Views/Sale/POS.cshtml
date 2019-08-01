@@ -34,7 +34,7 @@
     <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
     </div>
 
-    @Html.AntiForgeryToken()
+    
 
     <div>
         <h2>POS</h2>
@@ -45,74 +45,77 @@
                     <br><br>
 
 
+                   
+                        <table class="table">
+
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ProductCode)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ProductName)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SellingPrice)
+                                </th>
+                                <th>Qty</th>
+                                <th></th>
+                            </tr>
+                            <tr></tr>
 
 
-                    <table class="table">
-
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ProductCode)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ProductName)
-                            </th>
-
-                            <th>
-                                @Html.DisplayNameFor(model => model.SellingPrice)
-                            </th>
-                            <th>Qty</th>
-                            <th></th>
-                        </tr>
-                        <tr></tr>
+                            @foreach (var item in Model)
 
 
-                        @foreach (var item in Model)
-                        {
-                            <tbody id="myTable">
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ProductCode)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ProductName)
-                                    </td>
+                            {
+                                <tbody id="myTable">
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProductCode)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProductName)
+                                        </td>
 
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.SellingPrice)
-                                    </td>
-                                    <td>
-                                        @*<input type="number" class="numberInput" name="myNumber" id="myNumber" min="1">*@
-                                        <input type="number" class="numberInput" name="myNumber @item.ProductId" id="myNumber @item.ProductId" min="1">
-                                    </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SellingPrice)
+                                        </td>
+                                        <td>
+                                        
+                                            
+                                        <input type="number" class="numberInput" name="myNumber" id="myNumber" min="1">
+                                        @*<input type="number" class="numberInput" name="myNumber @item.ProductId" id="myNumber @item.ProductId" min="1">*@
+                                        
 
-                                    <td>
+                                        <td>
+                                            
+                                            <a href="@Url.Action("GetProductInReceipt", "Sale", new { id = item.ProductId })">+</a>
 
-                                        <a href="@Url.Action("GetProductInReceipt", "Sale", new { id = item.ProductId})">+</a>
+                                        </td>
 
-                                    </td>
-
-                                </tr>
-                            </tbody>
-                        }
-
-
-                    </table>
+                                    </tr>
+                                </tbody>
+                            }
 
 
-                </div>
+                        </table>
+                    
+
+                    </div>
 
             </div>
             <div class="col-lg-5" style="background-color:#f3ecec;">
                 <div class="row">
                     <div class="col-lg-5" style="margin-top:5px">
                         <address>
-                            <strong>AllyTees.com</strong>
+                            <strong>cavemanint.com</strong>
                             <br>
-                            P.O. Box 2012
+                            House# 01, Road# 02
                             <br>
-                            Detroit, Mi 48000
+                            Sector#12,Uttara,Dhaka
                             <br>
-                            <abbr title="Phone">P:</abbr> (213) 484-6829
+                            <abbr title="Phone">P:</abbr> (02) 484-6829
                         </address>
                     </div>
                     <div class="col-lg-7 text-right">
@@ -130,10 +133,11 @@
 
                     <div class="col-lg-12">
 
-                        <img src="~/Content/img/brand/blue.png" alt="allytees-500-trans.png" width="180" height="180">
+                        
 
                     </div>
-                    <div class="col-lg-12 center">
+                    <div class="col-lg-12 text-md-center">
+                        
                         <h1>Receipt</h1>
                     </div>
                 </div>
@@ -163,8 +167,7 @@
                                         <td class="justify-content-around"><em>@sellProduct.SalePrice</em></td>
                                         <td class="justify-content-around"><em>@sellProduct.TotalPrice</em></td>
                                         <td>
-                                           @* <input type="button" onclick="Remove(this)" />*@
-                                            <a href="@Url.Action("DeleteFromReceipt", "Sale", new { id = sellProduct.ProductId})">+</a>
+                                            <a href="@Url.Action("DeleteFromReceipt", "Sale", new { id = sellProduct.ProductId})"><i class="fa fa-trash" aria-hidden="true"></i></a>
 
                                         </td>
 

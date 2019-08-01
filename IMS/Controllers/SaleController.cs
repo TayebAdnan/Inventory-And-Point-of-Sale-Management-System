@@ -23,7 +23,7 @@ namespace IMS.Controllers
             return View(products.ToList());
         }
 
-        public ActionResult GetProductInReceipt(int id)
+        public ActionResult GetProductInReceipt(int id, string SaleQuantity)
         {
             FormCollection form = new FormCollection();
             int qty = Convert.ToInt32(form["test"]);
@@ -49,7 +49,7 @@ namespace IMS.Controllers
                     ProductId = product.ProductId,
                     SaleId = (db.Sales.Max(a => a.SaleId))+1,
                     SalePrice = product.SellingPrice,
-                    SaleQuantity = 2,
+                    SaleQuantity =Convert.ToDecimal(SaleQuantity),
                     TotalPrice = 2 * product.SellingPrice,
                     Product = db.Products.FirstOrDefault(a => a.ProductId == product.ProductId)
                 }
@@ -62,7 +62,7 @@ namespace IMS.Controllers
             decimal vat = System.Convert.ToDecimal(0.04);
             itemTotal.Vat = itemTotal.ItemTotal * vat;
             ViewBag.Vat = itemTotal.Vat;
-
+            
             itemTotal.TotalAmoun = System.Convert.ToDecimal(itemTotal.ItemTotal + itemTotal.Vat);
             ViewBag.TotalAmount = itemTotal.TotalAmoun;
 
@@ -221,7 +221,7 @@ namespace IMS.Controllers
 
         public ActionResult Unhold()
         {
-            GetProductInReceipt(2);
+            //GetProductInReceipt(2);
             return View("POS");
         }
 
