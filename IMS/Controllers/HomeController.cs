@@ -28,6 +28,12 @@ namespace IMS.Controllers
                 Inventorycount++;
             }
 
+            var allCategory = db.Categories.Select(a => a.CategoryId).ToList();
+
+            var sh = db.Products.Where(p => p.ProductCode == "sh-b-xl-001").Sum(p => p.ProductQuantity);
+
+
+
             ViewBag.countInventory = Inventorycount;
 
             return View();
@@ -60,6 +66,13 @@ namespace IMS.Controllers
             return View();
         }
        
+        public ActionResult GroupYearMonth()
+        {
+            var model = db.Products.GroupBy(a => new
+            {
 
+            });
+            return View();
+        }
     }
-}
+}   

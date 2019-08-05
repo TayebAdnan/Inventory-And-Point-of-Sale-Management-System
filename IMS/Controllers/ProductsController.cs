@@ -64,21 +64,31 @@ namespace IMS.Controllers
             //imageModel.ProductImage = "~/App_File/ProductImages/" + fileName;
             //fileName = Path.Combine(Server.MapPath("~/App_File/ProductImages/"), fileName);
             //imageModel.ImageFile.SaveAs(fileName);
-            using (IMSEntities5 dba = new IMSEntities5())
-            {
-                dba.Products.Add(imageModel);
-                dba.SaveChanges();
+            //using (IMSEntities5 dba = new IMSEntities5())
+            //{
+            //    dba.Products.Add(imageModel);
+            //    dba.SaveChanges();
 
-            }
+            //}
 
             if (ModelState.IsValid)
             {
-                        db.Products.Add(product);
-                        db.SaveChanges();
+
+
+                if (db.Products.Any(a => a.ProductCode == product.ProductCode))
+                {
+                    db.Database.ExecuteSqlCommand("UPDATE [dbo].[Product] SET ProductQuantity = ProductQuantity+'"+product.ProductQuantity+"' WHERE ProductCode = '" + product.ProductCode + "'");
+                }
+                else
+                {
+                    db.Products.Add(product);
+                    db.SaveChanges();
+                }
+                        
                         return RedirectToAction("Index");
-                    }
-                
-                ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", product.CategoryId);
+                    
+            }
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", product.CategoryId);
                 ViewBag.ColorId = new SelectList(db.Colors, "ColorId", "ColorName", product.ColorId);
                 ViewBag.ManufactureId = new SelectList(db.Manufactures, "ManufactureId", "LotNumber", product.ManufactureId);
                 ViewBag.SizeId = new SelectList(db.Sizes, "SizeId", "SizeName", product.SizeId);

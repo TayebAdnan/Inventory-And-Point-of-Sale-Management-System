@@ -34,8 +34,9 @@ namespace IMS.Controllers
         }
 
 
-        public ActionResult InventoryReport()
+        public ActionResult InventoryList()
         {
+            db.Products.Sum(a => a.ProductQuantity);
             return View();
         }
        
