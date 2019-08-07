@@ -43,6 +43,12 @@ namespace IMS.Controllers
                 ProductSales = new List<ProductSale>();
             }
 
+             
+            if (ProductSales.Exists(a => a.ProductId==productId))
+            {
+                
+            }
+
             ProductSales.Add
             (
                 new ProductSale()
