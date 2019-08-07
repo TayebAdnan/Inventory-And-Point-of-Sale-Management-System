@@ -33,14 +33,12 @@
     <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
         <div class="container-fluid">
             <!-- Toggler -->
-           
             <!-- Brand -->
             <a class="navbar-brand pt-0" href="#">
-                <img style="width:200px"   src="~/Content/img/brand/CMI.png" class="navbar-brand-img" alt="...">
-            <h4>CaveMan International</h4>
+                <img style="width:200px" src="~/Content/img/brand/CMI.png" class="navbar-brand-img" alt="...">
+                <h4>CaveMan International</h4>
             </a>
             <!-- User -->
-           
             <!-- Collapse -->
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                 <!-- Collapse header -->
@@ -61,16 +59,16 @@
                 </div>
                 <!-- Form -->
                 <div class="container">
-                <form class="mt-4 mb-3 d-md-none">
-                    <div class="input-group input-group-rounded input-group-merge">
-                        <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <span class="fa fa-search"></span>
+                    <form class="mt-4 mb-3 d-md-none">
+                        <div class="input-group input-group-rounded input-group-merge">
+                            <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <span class="fa fa-search"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                 </div>
                 <!-- Navigation -->
                 <ul class="navbar-nav">
@@ -81,7 +79,7 @@
                             <i class="ni ni-tv-2 text-primary"></i> Dashboard
                         </a>
                     </li>
-                    
+
                     <li class="nav-item dropdown">
                         <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fab fa-product-hunt"></i> Product
@@ -96,11 +94,11 @@
                                 <i class="ni ni-single-02"></i>
                                 <span>Product List</span>
                             </a>
-                           
+
                         </div>
 
                     </li>
-                    
+
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("GetDateRange","Report")">
                             <i class="fas fa-box-open"></i>Sales
@@ -132,7 +130,7 @@
                         </a>
                     </li>
                 </ul>
-               
+
             </div>
         </div>
     </nav>
@@ -145,15 +143,15 @@
                 <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="@Url.Action("Index","Home")">Dashboard</a>
                 <!-- Form -->
                 @*<form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-                    <div class="form-group mb-0">
-                        <div class="input-group input-group-alternative">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <div class="form-group mb-0">
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                </div>
+                                <input class="form-control" placeholder="Search" type="text">
                             </div>
-                            <input class="form-control" placeholder="Search" type="text">
                         </div>
-                    </div>
-                </form>*@
+                    </form>*@
                 <!-- User -->
                 <ul class="navbar-nav align-items-center d-none d-md-flex">
                     <li class="nav-item dropdown">
@@ -165,10 +163,11 @@
                                 </span>
                                 <div class="media-body ml-2 d-none d-lg-block">
                                     @*<span class="mb-0 text-sm  font-weight-bold"><b>@Session["UserName"].ToString()</b>
-                                    
-                                    </span>*@
-                                     <span class="mb-0 text-sm  font-weight-bold"><b>Adnan</b>
-                                    
+
+                                        </span>*@
+                                    <span class="mb-0 text-sm  font-weight-bold">
+                                        <b>Adnan</b>
+
                                     </span>
                                 </div>
                             </div>
@@ -185,7 +184,7 @@
                                 <i class="ni ni-settings-gear-65"></i>
                                 <span>Settings</span>
                             </a>
-                            
+
                             <div class="dropdown-divider"></div>
                             <a href="@Url.Action("SignOut","Account")" class="dropdown-item">
                                 <i class="ni ni-user-run"></i>
@@ -197,21 +196,18 @@
             </div>
         </nav>
         <!-- Header -->
-        
-        
+        <!-- Page content -->
+        @RenderBody()
 
-            <!-- Page content -->
-            @RenderBody()
 
-        
     </div>
-    
+
 
     @Scripts.Render("~/template/js")
 
 
 
-
+    <script src="~/Scripts/js/jquery.min.js"></script>
 
 </body>
 

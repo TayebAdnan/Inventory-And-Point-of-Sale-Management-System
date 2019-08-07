@@ -72,7 +72,13 @@
                             @Html.DisplayFor(modelItem => item.SellingPrice)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ProductImage)
+                            
+                            <div class="img-responsive" style="margin-bottom:20px">
+                                @*<img src="~/App_File/ProductImages/@item.ProductImage" height="150" width="100" />*@
+                                <img src=" @item.ProductImage" height="150" width="100" />
+
+                            </div>
+
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.ProductDate)

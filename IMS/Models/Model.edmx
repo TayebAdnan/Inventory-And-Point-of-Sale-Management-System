@@ -64,7 +64,7 @@
           <Property Name="ProductQuantity" Type="int" />
           <Property Name="AlertQuantity" Type="int" />
           <Property Name="SellingPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ProductImage" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductImage" Type="nvarchar(max)" />
           <Property Name="ManufactureId" Type="int" Nullable="false" />
           <Property Name="ProductDate" Type="date" />
         </EntityType>
@@ -75,7 +75,7 @@
           <Property Name="ProductSaleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="SaleId" Type="int" Nullable="false" />
-          <Property Name="SaleQuantity" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SaleQuantity" Type="int" Nullable="false" />
           <Property Name="SalePrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
@@ -461,7 +461,7 @@
           <Property Name="ProductQuantity" Type="Int32" />
           <Property Name="AlertQuantity" Type="Int32" />
           <Property Name="SellingPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="ProductImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ManufactureId" Type="Int32" Nullable="false" />
           <Property Name="ProductDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Adjustments" Relationship="Self.FK_Adjustment_Product" FromRole="Product" ToRole="Adjustment" />
@@ -480,7 +480,7 @@
           <Property Name="ProductSaleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="SaleId" Type="Int32" Nullable="false" />
-          <Property Name="SaleQuantity" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SaleQuantity" Type="Int32" Nullable="false" />
           <Property Name="SalePrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ProductSale_Product" FromRole="ProductSale" ToRole="Product" />

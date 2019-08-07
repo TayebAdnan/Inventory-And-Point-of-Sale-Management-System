@@ -11,7 +11,8 @@ namespace IMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -33,9 +34,12 @@ namespace IMS.Models
         public Nullable<int> AlertQuantity { get; set; }
         public decimal SellingPrice { get; set; }
         public string ProductImage { get; set; }
+        
         public int ManufactureId { get; set; }
+
         public Nullable<System.DateTime> ProductDate { get; set; }
-    
+
+        
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Adjustment> Adjustments { get; set; }
         public virtual Category Category { get; set; }

@@ -17,7 +17,7 @@ namespace IMS.Models
         public int ProductSaleId { get; set; }
         public int ProductId { get; set; }
         public int SaleId { get; set; }
-        public decimal SaleQuantity { get; set; }
+        public int SaleQuantity { get; set; }
         public decimal SalePrice { get; set; }
         public decimal TotalPrice { get; set; }
     

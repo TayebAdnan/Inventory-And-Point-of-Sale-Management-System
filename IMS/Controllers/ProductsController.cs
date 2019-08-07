@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
@@ -50,42 +51,58 @@ namespace IMS.Controllers
             return View();
         }
 
-        //POST: Products/Create
-        //To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProductId,ProductCode,ProductName,CategoryId,ColorId,SizeId,ProductQuantity,AlertQuantity,SellingPrice,Image,ManufactureId,ProductDate")]
-       Product imageModel, Product product)
+        Product product, HttpPostedFileBase ProductImage)
         {
-            //string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
-            //string extension = Path.GetExtension(imageModel.ImageFile.FileName);
-            //fileName = fileName + DateTime.Now.ToString("yymmssff") + extension;
-            //imageModel.ProductImage = "~/App_File/ProductImages/" + fileName;
-            //fileName = Path.Combine(Server.MapPath("~/App_File/ProductImages/"), fileName);
-            //imageModel.ImageFile.SaveAs(fileName);
-            //using (IMSEntities5 dba = new IMSEntities5())
-            //{
-            //    dba.Products.Add(imageModel);
-            //    dba.SaveChanges();
-
-            //}
-
+           
             if (ModelState.IsValid)
             {
 
+                try
+                {
+                    if (ProductImage != null)
+                    {
+                        // extract only the filename
+                        var fileName = Path.GetFileNameWithoutExtension(ProductImage.FileName);
+                        string extention = Path.GetExtension(ProductImage.FileName);
+                        fileName = fileName + extention;
+                        // store the file inside ~/App_Data/uploads folder
+                        var path = Path.Combine(Server.MapPath("~/App_File/ProductImages/"), fileName);
+                        var pathforDbSave = "~/App_File/ProductImages/" + fileName;
+                        product.ProductImage = pathforDbSave;
+                        ProductImage.SaveAs(path);
+                        db.Products.Add(product);
+                        db.SaveChanges();
 
-                if (db.Products.Any(a => a.ProductCode == product.ProductCode))
-                {
-                    db.Database.ExecuteSqlCommand("UPDATE [dbo].[Product] SET ProductQuantity = ProductQuantity+'"+product.ProductQuantity+"' WHERE ProductCode = '" + product.ProductCode + "'");
+                    }
+
+                    
+
+                    ViewBag.FileStatus = "File uploaded successfully.";
                 }
-                else
+                catch (Exception)
                 {
-                    db.Products.Add(product);
-                    db.SaveChanges();
+
+                    ViewBag.FileStatus = "Error while file uploading.";
                 }
+
+
+                //    if (ModelState.IsValid)
+                //{
+
+
+                //    if (db.Products.Any(a => a.ProductCode == product.ProductCode))
+                //    {
+                //        db.Database.ExecuteSqlCommand("UPDATE [dbo].[Product] SET ProductQuantity = ProductQuantity+'"+product.ProductQuantity+"' WHERE ProductCode = '" + product.ProductCode + "'");
+                //    }
+
+                //db.Products.Add(product);
+                   // db.SaveChanges();
                         
-                        return RedirectToAction("Index");
+                    return RedirectToAction("Index");
                     
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", product.CategoryId);

@@ -23,16 +23,17 @@ namespace IMS.Controllers
             return View(products.ToList());
         }
 
-        public ActionResult GetProductInReceipt(int id, string SaleQuantity)
+        public ActionResult GetProductInReceipt(string qty,int productId)
+             
         {
-            FormCollection form = new FormCollection();
-            int qty = Convert.ToInt32(form["test"]);
-
-            ProductSale productSale = db.ProductSales.FirstOrDefault(a => a.ProductId == id);
-            Product product = db.Products.FirstOrDefault(a => a.ProductId == id);
+           
+           
+            ProductSale productSale = db.ProductSales.FirstOrDefault(a => a.ProductId == productId);
+            Product product = db.Products.FirstOrDefault(a => a.ProductId == productId);
 
            
-            ViewBag.InvoiceNumber = (db.Sales.Max(a => a.InvoiceNumber)) + 1; 
+            ViewBag.InvoiceNumber = (db.Sales.Max(a => a.InvoiceNumber)) + 1;
+            ViewBag.qty =Convert.ToInt32(qty);
             
             Sale itemTotal = new Sale();
 
@@ -49,11 +50,13 @@ namespace IMS.Controllers
                     ProductId = product.ProductId,
                     SaleId = (db.Sales.Max(a => a.SaleId))+1,
                     SalePrice = product.SellingPrice,
-                    SaleQuantity =Convert.ToDecimal(SaleQuantity),
+                    SaleQuantity = ViewBag.qty,
                     TotalPrice = 2 * product.SellingPrice,
                     Product = db.Products.FirstOrDefault(a => a.ProductId == product.ProductId)
                 }
                 );
+            
+
             Session["ProductSale"] = ProductSales;
 
             itemTotal.ItemTotal = ProductSales.Sum(a => a.TotalPrice);
@@ -95,7 +98,9 @@ namespace IMS.Controllers
         .ToList();
 
             POS();
+            
             return View("POS");
+            
         }
 
 
