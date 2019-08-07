@@ -71,7 +71,7 @@ namespace IMS.Controllers
                         fileName = fileName + extention;
                         // store the file inside ~/App_Data/uploads folder
                         var path = Path.Combine(Server.MapPath("~/App_File/ProductImages/"), fileName);
-                        var pathforDbSave = "~/App_File/ProductImages/" + fileName;
+                        var pathforDbSave = "/App_File/ProductImages/" + fileName;
                         product.ProductImage = pathforDbSave;
                         ProductImage.SaveAs(path);
                         db.Products.Add(product);

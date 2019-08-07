@@ -51,7 +51,7 @@ namespace IMS.Controllers
                     SaleId = (db.Sales.Max(a => a.SaleId))+1,
                     SalePrice = product.SellingPrice,
                     SaleQuantity = ViewBag.qty,
-                    TotalPrice = 2 * product.SellingPrice,
+                    TotalPrice = ViewBag.qty * product.SellingPrice,
                     Product = db.Products.FirstOrDefault(a => a.ProductId == product.ProductId)
                 }
                 );
