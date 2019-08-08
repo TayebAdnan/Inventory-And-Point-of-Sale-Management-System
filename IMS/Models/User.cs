@@ -20,7 +20,7 @@ namespace IMS.Models
         public string UserPhone { get; set; }
         public string UserAddress { get; set; }
         public string UserPassword { get; set; }
-        public byte[] UserImage { get; set; }
+        public string UserImage { get; set; }
         public int RoleId { get; set; }
     
         public virtual Role Role { get; set; }

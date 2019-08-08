@@ -144,7 +144,7 @@
           <Property Name="UserPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="UserAddress" Type="nvarchar" MaxLength="350" />
           <Property Name="UserPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="UserImage" Type="image" />
+          <Property Name="UserImage" Type="nvarchar(max)" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Adjustment_Product">
@@ -561,7 +561,7 @@
           <Property Name="UserPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserAddress" Type="String" MaxLength="350" FixedLength="false" Unicode="true" />
           <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="UserImage" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Role" Relationship="Self.FK_Users_Role" FromRole="Users" ToRole="Role" />
         </EntityType>

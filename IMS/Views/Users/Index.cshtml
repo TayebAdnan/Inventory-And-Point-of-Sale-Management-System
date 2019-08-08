@@ -58,7 +58,11 @@
                         @Html.DisplayFor(modelItem => item.UserPassword)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.UserImage)
+                        <div class="img-responsive" style="margin-bottom:20px">
+                            @*<img src="~/App_File/ProductImages/@item.ProductImage" height="150" width="100" />*@
+                            <img src="@item.UserImage" height="150" width="100" />
+
+                        </div>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Role.RoleName)

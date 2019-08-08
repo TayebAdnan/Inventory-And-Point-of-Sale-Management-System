@@ -122,6 +122,7 @@ namespace IMS.Controllers
                 db.Sales.Add(
                     new Sale()
                     {
+                        ProductId = 2,
                         SaleDateTime = item.SaleDateTime,
                         ItemTotal = item.ItemTotal,
                         Vat = item.Vat,

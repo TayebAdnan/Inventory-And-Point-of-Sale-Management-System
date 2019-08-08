@@ -3,23 +3,26 @@
 @{
     ViewBag.Title = "Create";
 }
-    
-        <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
-        </div>
-<div class="container">
-        <h2>Create</h2>
+    <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+       
+    </div>
+<div class="col-md-10"> </div>
+
+<div class="container" style="background-color:#95999e">
+    <h2 style="color:#ffffff">ADD NEW User</h2>
+    <div class="container col-md-10" style="background-color:#ffffff">
 
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
-                <h4>User</h4>
+
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                     </div>
@@ -27,7 +30,7 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.UserEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
                     </div>
@@ -58,10 +61,8 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.UserImage, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        <input name="UserImage" type="file" id="UserImage" class="form-control">
-                        @Html.ValidationMessageFor(model => model.UserImage, "", new { @class = "text-danger" })
+                        <input type="file" id="UserImage" name="UserImage" class="form-control" /><br />
                     </div>
                 </div>
 
@@ -80,7 +81,5 @@
                 </div>
             </div>
         }
-        </div>
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+    </div>
+</div>

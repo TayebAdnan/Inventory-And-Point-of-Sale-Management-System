@@ -2237,9 +2237,11 @@
     <Content Include="Views\Report\SaleReport.cshtml" />
     <Content Include="Views\Inventory\Inventory.cshtml" />
     <Content Include="Views\Inventory\InventoryView.cshtml" />
+    <Content Include="Views\Users\vv.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_File\UserImages\" />
     <Folder Include="Images\" />
     <Folder Include="Views\Color\" />
   </ItemGroup>

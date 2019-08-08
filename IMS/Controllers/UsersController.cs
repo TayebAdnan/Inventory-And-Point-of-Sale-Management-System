@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -48,13 +49,34 @@ namespace IMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserId,UserName,UserEmail,UserPhone,UserAddress,UserPassword,UserImage,RoleId")] User user)
+        public ActionResult Create([Bind(Include = "UserId,UserName,UserEmail,UserPhone,UserAddress,UserPassword,UserImage,RoleId")]
+        User user, HttpPostedFileBase UserImage)
         {
+           
             if (ModelState.IsValid)
             {
-                db.Users.Add(user);
+                try
+                {
+                    if (UserImage != null)
+                    {
+                    var fileName = Path.GetFileNameWithoutExtension(UserImage.FileName);
+                    string extention = Path.GetExtension(UserImage.FileName);
+                    fileName = fileName + extention;
+                    // store the file inside ~/App_Data/uploads folder
+                    var path = Path.Combine(Server.MapPath("~/App_File/UserImages/"), fileName);
+                    var pathforDbSave = "/App_File/UserImages/" + fileName;
+                    user.UserImage = pathforDbSave;
+                    UserImage.SaveAs(path);
+                    db.Users.Add(user);
                 db.SaveChanges();
+                }
                 return RedirectToAction("Index");
+                }
+
+                catch(Exception)
+                {
+                    ViewBag.error = " Failed";
+                }
             }
 
             ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", user.RoleId);
@@ -118,6 +140,11 @@ namespace IMS.Controllers
             db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult vv()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)
