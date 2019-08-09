@@ -46,8 +46,34 @@ namespace IMS.Controllers
              
             if (ProductSales.Exists(a => a.ProductId==productId))
             {
-                
+                List<ProductSale> productSales = new List<ProductSale>();
+                List<ProductSale> newsession = new List<ProductSale>();
+
+                productSales =(List<ProductSale>) Session["ProductSale"];
+                newsession = (List<ProductSale>)Session["ProductSale"];
+
+                var oldQty = newsession.FirstOrDefault(a => a.ProductId == product.ProductId).SaleQuantity;
+                var oldTotalPrice = newsession.FirstOrDefault(a => a.ProductId == productId).TotalPrice;
+                var removable = productSales.Find(a => a.ProductId == productId);
+
+                productSales.Remove(removable);
+
+                productSales.Add(
+                    new ProductSale() {
+                        ProductId = product.ProductId,
+                        SaleId = (db.Sales.Max(a => a.SaleId)) + 1,
+                        SalePrice = product.SellingPrice,
+                        SaleQuantity = ViewBag.qty + oldQty,
+                        TotalPrice = ViewBag.qty * product.SellingPrice + oldTotalPrice,
+                        Product = db.Products.FirstOrDefault(a => a.ProductId == product.ProductId)
+
+                    });
+                Session["ProductSale"] = productSales;
+
             }
+
+            else
+            { 
 
             ProductSales.Add
             (
@@ -61,7 +87,7 @@ namespace IMS.Controllers
                     Product = db.Products.FirstOrDefault(a => a.ProductId == product.ProductId)
                 }
                 );
-            
+            }
 
             Session["ProductSale"] = ProductSales;
 
@@ -158,7 +184,7 @@ namespace IMS.Controllers
                 db.SaveChanges();
 
 
-                db.Database.ExecuteSqlCommand("UPDATE [dbo].[Product] SET ProductQuantity = ProductQuantity-1 WHERE ProductId = '" + item.ProductId + "'");
+                db.Database.ExecuteSqlCommand("UPDATE [dbo].[Product] SET ProductQuantity = ProductQuantity-'"+item.SaleQuantity+"' WHERE ProductId = '" + item.ProductId + "'");
             }
             
             Session.Remove("Sale");

@@ -63,7 +63,13 @@ namespace IMS.Controllers
 
                 try
                 {
-                    if (ProductImage != null)
+                    if (db.Products.Any(a => a.ProductCode == product.ProductCode))
+                            {
+                                db.Database.ExecuteSqlCommand("UPDATE [dbo].[Product] SET ProductQuantity = ProductQuantity+'"+product.ProductQuantity+"' WHERE ProductCode = '" + product.ProductCode + "'");
+                            }
+
+                    else { 
+                        if (ProductImage != null)
                     {
                         // extract only the filename
                         var fileName = Path.GetFileNameWithoutExtension(ProductImage.FileName);
@@ -79,8 +85,8 @@ namespace IMS.Controllers
 
                     }
 
-                    
 
+                    }
                     ViewBag.FileStatus = "File uploaded successfully.";
                 }
                 catch (Exception)
