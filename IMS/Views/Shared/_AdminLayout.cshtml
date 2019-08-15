@@ -104,10 +104,24 @@
                             <i class="fas fa-box-open"></i>Sales
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Inventory","Inventory")">
-                            <i class="far fa-folder"></i>Inventory
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-folder"></i> Inventory
                         </a>
+
+                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                            <a href="@Url.Action("Inventory","Inventory")" class="dropdown-item">
+                                <i class="ni ni-single-02"></i>
+                                <span>Check Inventory</span>
+                            </a>
+                            <a href="@Url.Action("InventoryList","Inventory")" class="dropdown-item">
+                                <i class="ni ni-single-02"></i>
+                                <span>Available Stock</span>
+                            </a>
+
+                        </div>
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("POS","Sale")">

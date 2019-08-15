@@ -57,7 +57,10 @@ namespace IMS.Controllers
         public ActionResult Create([Bind(Include = "ProductId,ProductCode,ProductName,CategoryId,ColorId,SizeId,ProductQuantity,AlertQuantity,SellingPrice,Image,ManufactureId,ProductDate")]
         Product product, HttpPostedFileBase ProductImage)
         {
-           
+
+            ManufactureProduct manufactureProduct = new ManufactureProduct();
+
+            
             if (ModelState.IsValid)
             {
 
@@ -84,6 +87,7 @@ namespace IMS.Controllers
                         db.SaveChanges();
 
                     }
+                        
 
 
                     }
@@ -95,20 +99,21 @@ namespace IMS.Controllers
                     ViewBag.FileStatus = "Error while file uploading.";
                 }
 
+                int id = db.Products.Max(a => a.ProductId);
 
-                //    if (ModelState.IsValid)
-                //{
+                db.ManufactureProducts.Add(
+                    new ManufactureProduct
+                    {
+                        Quantity =Convert.ToInt32 (product.ProductQuantity),
+                        ManufactureDateTime = Convert.ToDateTime (product.ProductDate),
+                        ProductId =  id
+
+                    }
+                    );
+                db.SaveChanges();
 
 
-                //    if (db.Products.Any(a => a.ProductCode == product.ProductCode))
-                //    {
-                //        db.Database.ExecuteSqlCommand("UPDATE [dbo].[Product] SET ProductQuantity = ProductQuantity+'"+product.ProductQuantity+"' WHERE ProductCode = '" + product.ProductCode + "'");
-                //    }
-
-                //db.Products.Add(product);
-                   // db.SaveChanges();
-                        
-                    return RedirectToAction("Index");
+                 return RedirectToAction("Index");
                     
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", product.CategoryId);

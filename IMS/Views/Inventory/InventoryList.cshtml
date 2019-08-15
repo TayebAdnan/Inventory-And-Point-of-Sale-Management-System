@@ -1,7 +1,89 @@
-﻿
+﻿@model IEnumerable<IMS.Models.Product>
+
 @{
-    ViewBag.Title = "InventoryList";
+    ViewBag.Title = "Index";
 }
 
-<h2>InventoryList</h2>
+<div>
+    <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+    </div>
+
+    <h2></h2>
+   
+    <head>
+
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+        
+        <script>
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+
+            /**/</script>
+
+    </head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+
+    <link href="~/Content/css/ProductView.css" rel="stylesheet" />
+    <div class="container">
+        <div class="container mb-4">
+            
+                <input id="myInput" type="text" placeholder="Search..">
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col"> </th>
+                                    <th>Product</th>
+                                    <th scope="col">Color</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col" class="text-center">Available Quantity</th>
+
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody id="myTable">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><img src=" @item.ProductImage" height="50" width="50" /></td>
+                                        <td>@item.ProductName</td>
+                                        <td>@item.Color.ColorName</td>
+                                        <td>@item.Size.SizeName</td>
+                                        <td style="width:10px">@item.ProductQuantity</td>
+
+                                    </tr>
+                                }
+
+
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* <img src=" @item.ProductImage" height="150" width="100" />*@
+
+</div>
 

@@ -11,99 +11,72 @@
 
         <h2>Index</h2>
 
-        <p>
-            @Html.ActionLink("Create New", "Create", "Products")
-        </p>
-            <table class="table">
 
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProductCode)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProductName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProductQuantity)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.AlertQuantity)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SellingPrice)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProductImage)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProductDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Category.CategoryName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Color.ColorName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Manufacture.LotNumber)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Size.SizeName)
-                    </th>
-                    <th></th>
-                </tr>
+        <head>
 
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProductCode)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProductName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProductQuantity)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AlertQuantity)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SellingPrice)
-                        </td>
-                        <td>
-                            
-                            <div class="img-responsive" style="margin-bottom:20px">
-                                @*<img src="~/App_File/ProductImages/@item.ProductImage" height="150" width="100" />*@
-                                <img src=" @item.ProductImage" height="150" width="100" />
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                            </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProductDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Category.CategoryName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Color.ColorName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Manufacture.LotNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Size.SizeName)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
-                        </td>
-                    </tr>
-                }
+        </head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-            </table>
-            
+
+        <link href="~/Content/css/ProductView.css" rel="stylesheet" />
+        <div class="container">
+            <div class="container mb-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"> </th>
+                                        <th>Product</th>
+                                        <th scope="col">Color</th>
+                                        <th scope="col">Size</th>
+                                        <th scope="col" class="text-center">Quantity</th>
+                                        <th scope="col" class="text-right">Price</th>
+                                        <th scope="col" class="text-right">Action</th>
+
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td><img src=" @item.ProductImage" height="50" width="50" /></td>
+                                            <td>@item.ProductName</td>
+                                            <td>@item.Color.ColorName</td>
+                                            <td>@item.Size.SizeName</td>
+                                            <td style="width:10px">@item.ProductQuantity</td>
+                                            <td class="text-right">@item.SellingPrice</td>
+                                            <td class="text-right">
+
+                                                <a class="btn btn-sm btn-icon" href="@Url.Action("Edit","Products", new {id = item.ProductId })"><i class="fa fa-edit" style="font-size:18px"></i></a>
+                                                <a class="btn btn-sm btn-danger"><i class="fa f-trash" style="font-size:10px"></i></a>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                    
+
+
+                                    
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       @* <img src=" @item.ProductImage" height="150" width="100" />*@
+
     </div>
-    
+
+                                        

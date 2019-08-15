@@ -147,6 +147,7 @@
     <Compile Include="Controllers\SaleCheckController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WeekMonthReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2245,6 +2246,7 @@
     <Folder Include="App_File\UserImages\" />
     <Folder Include="Images\" />
     <Folder Include="Views\Color\" />
+    <Folder Include="Views\WeekMonthReport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

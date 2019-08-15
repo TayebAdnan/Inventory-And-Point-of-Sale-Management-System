@@ -49,7 +49,9 @@
           <Property Name="ManufactureProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="ManufactureId" Type="int" Nullable="false" />
-          <Property Name="ManufactureCost" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ManufactureCost" Type="nvarchar" MaxLength="50" />
+          <Property Name="ManufactureDateTime" Type="date" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -445,8 +447,10 @@
           <Property Name="ManufactureProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="ManufactureId" Type="Int32" Nullable="false" />
-          <Property Name="ManufactureCost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ManufactureCost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ManufactureProduct_Product" FromRole="ManufactureProduct" ToRole="Product" />
+          <Property Name="ManufactureDateTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -868,6 +872,8 @@
           <EntitySetMapping Name="ManufactureProducts">
             <EntityTypeMapping TypeName="IMSModel.ManufactureProduct">
               <MappingFragment StoreEntitySet="ManufactureProduct">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ManufactureDateTime" ColumnName="ManufactureDateTime" />
                 <ScalarProperty Name="ManufactureProductId" ColumnName="ManufactureProductId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ManufactureId" ColumnName="ManufactureId" />
