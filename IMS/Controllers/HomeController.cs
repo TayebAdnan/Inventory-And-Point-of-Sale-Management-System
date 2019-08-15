@@ -16,25 +16,17 @@ namespace IMS.Controllers
         {
             int Inventorycount = 0;
 
-            var sh_b_xl_001 = db.Products.Where(p => p.ProductCode == "sh-b-xl-001").Sum(p => p.ProductQuantity);
-            var sh_b_l_001 = db.Products.Where(p => p.ProductCode == "sh-b-l-001").Sum(p => p.ProductQuantity);
-            var sh_b_m_001 = db.Products.Where(p => p.ProductCode == "sh-b-m-001").Sum(p => p.ProductQuantity);
-            var sh_b_s_001 = db.Products.Where(p => p.ProductCode == "sh-b-m-001").Sum(p => p.ProductQuantity);
-            var alert = db.Products.FirstOrDefault(p => p.ProductCode == "sh-b-xl-001").AlertQuantity;
+            var a = db.Products.ToArray();
 
 
-            if (sh_b_xl_001 <= alert)
+            for (int i = 0; i < a.Length; i++)
             {
-                ViewBag.alert = "Xl size Blue Shirt is in alerming rate";
-                Inventorycount++;
+                if (a[i].ProductQuantity <= a[i].AlertQuantity)
+                {
+                    Inventorycount++;
+                }
             }
-
-            var allCategory = db.Categories.Select(a => a.CategoryId).ToList();
-
-            var sh = db.Products.Where(p => p.ProductCode == "sh-b-xl-001").Sum(p => p.ProductQuantity);
-
-
-
+                    
             ViewBag.countInventory = Inventorycount;
 
             return View();
@@ -46,9 +38,11 @@ namespace IMS.Controllers
             Session.Remove("Sale");
 
             //Todays Added Product
+            try { 
             var count = db.ManufactureProducts.Where(p => p.ManufactureDateTime == DateTime.Today).Sum(p => p.Quantity);
             ViewBag.TodaysProduct = count;
-
+            }
+            catch { ViewBag.TodaysProduct = 0; }
             InventoryAlert();
 
             BarChart();
