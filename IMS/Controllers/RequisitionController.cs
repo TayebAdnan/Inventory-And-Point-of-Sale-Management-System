@@ -16,40 +16,20 @@ namespace IMS.Controllers
         {
 
             Session.Remove("Requisition");
-            List<Product> repo = new List<Product>();
+            //List<Product> repo = new List<Product>();
 
-            repo = (List<Product>)Session["Requisition"];
+            List<Product> repo = (List<Product>)Session["Requisition"];
             if (repo == null)
             {
                 repo = new List<Product>();
             }
-            var a = db.Products.ToArray();
-            
-            
-            for ( int i = 0; i< a.Length; i++)
-            {
-                if(a[i].ProductQuantity <= a[i].AlertQuantity)
-                {
-                    repo.Add(
-                        new Product
-                        {
-                            ProductId = a[i].ProductId,
-                            ProductName = a[i].ProductName,
-                            ProductQuantity = a[i].ProductQuantity + 10,
-                            
-                            ColorId = a[i].ColorId,
-                            SizeId = a[i].SizeId
-                            //Color = db.Colors.FirstOrDefault(b => b.ColorId == a[i].ColorId),
-                            //Size = db.Sizes.FirstOrDefault(b => b.SizeId == a[i].SizeId)
 
-                        }
 
-                        );
+            List<Product> products = new List<Product>();
 
-                }
-            }
+            products = db.Products.Where(y => (y.ProductQuantity <= y.AlertQuantity)).ToList();
 
-            Session["Requisition"] = repo;
+            Session["Requisition"] = products;
             
             
             
