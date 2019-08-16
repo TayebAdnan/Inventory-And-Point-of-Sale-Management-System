@@ -56,9 +56,10 @@ namespace IMS.Controllers
                 var oldTotalPrice = newsession.FirstOrDefault(a => a.ProductId == productId).TotalPrice;
                 var removable = productSales.Find(a => a.ProductId == productId);
 
-                productSales.Remove(removable);
-
-                productSales.Add(
+                
+                if(ViewBag.qty + oldQty <= product.ProductQuantity) {
+                    productSales.Remove(removable);
+                    productSales.Add(
                     new ProductSale() {
                         ProductId = product.ProductId,
                         SaleId = (db.Sales.Max(a => a.SaleId)) + 1,
@@ -68,12 +69,21 @@ namespace IMS.Controllers
                         Product = db.Products.FirstOrDefault(a => a.ProductId == product.ProductId)
 
                     });
-                Session["ProductSale"] = productSales;
+
+                    Session["ProductSale"] = productSales;
+                }
+                else
+                {
+                    ViewBag.SaleError = "Product Quantity is not available";
+                    Session["ProductSale"] = newsession;
+                }
+                
 
             }
 
             else
             { 
+                if(ViewBag.qty <= product.ProductQuantity) { 
 
             ProductSales.Add
             (
@@ -87,6 +97,12 @@ namespace IMS.Controllers
                     Product = db.Products.FirstOrDefault(a => a.ProductId == product.ProductId)
                 }
                 );
+                }
+
+                else
+                {
+                    ViewBag.SaleError = "Product Quantity is not available";
+                }
             }
 
             Session["ProductSale"] = ProductSales;
@@ -176,15 +192,16 @@ namespace IMS.Controllers
                     {
                         ProductId = item.ProductId,
                         SaleId = item.SaleId,
-                        SaleQuantity =item.SaleQuantity,
+                        SaleQuantity = item.SaleQuantity,
                         SalePrice = item.SalePrice,
-                        TotalPrice =item.TotalPrice
-
+                        TotalPrice = item.TotalPrice
+                        
                     });
                 db.SaveChanges();
 
 
                 db.Database.ExecuteSqlCommand("UPDATE [dbo].[Product] SET ProductQuantity = ProductQuantity-'"+item.SaleQuantity+"' WHERE ProductId = '" + item.ProductId + "'");
+               
             }
             
             Session.Remove("Sale");
@@ -260,6 +277,15 @@ namespace IMS.Controllers
         public ActionResult Unhold()
         {
             //GetProductInReceipt(2);
+            return View("POS");
+        }
+
+
+        public ActionResult SaleCancel()
+        {
+            Session.Remove("Sale");
+            Session.Remove("ProductSale");
+            POS();
             return View("POS");
         }
 

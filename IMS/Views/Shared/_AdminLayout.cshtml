@@ -71,7 +71,7 @@
                     </form>
                 </div>
                 <!-- Navigation -->
-                <ul class="navbar-nav">
+                <ul class="navbar-nav" style="color:red;background-color:#ffffff">
                     <li class="nav-item">
 
                         <a class="nav-link" href="@Url.Action("Index","Home")">
@@ -87,11 +87,12 @@
 
                         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                             <a href="@Url.Action("Create","Products")" class="dropdown-item">
-                                <i class="ni ni-single-02"></i>
+                                <i class="fas fa-plus"></i>
+
                                 <span>Add New Product</span>
                             </a>
                             <a href="@Url.Action("Index","Products")" class="dropdown-item">
-                                <i class="ni ni-single-02"></i>
+                                <i class="fa fa-list" aria-hidden="true"></i>
                                 <span>Product List</span>
                             </a>
 
@@ -101,10 +102,10 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("GetDateRange","Report")">
-                            <i class="fas fa-box-open"></i>Sales
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i></i>Sales
                         </a>
                     </li>
-                    
+
                     <li class="nav-item dropdown">
                         <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="far fa-folder"></i> Inventory
@@ -128,9 +129,14 @@
                             <i class="far fa-folder-open"></i>POS
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index","Requisition")">
+                            <i class="far fa-folder-open"></i>Requisition
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fab fa-product-hunt"></i> Report
+                            <i class="fa fa-file" aria-hidden="true"></i></i> Report
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
@@ -153,11 +159,11 @@
 
                         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                             <a href="@Url.Action("Create","Users")" class="dropdown-item">
-                                <i class="ni ni-single-02"></i>
+                                <i class="fa fa-plus" aria-hidden="true"></i>
                                 <span>Add New User</span>
                             </a>
                             <a href="@Url.Action("Index","Users")" class="dropdown-item">
-                                <i class="ni ni-single-02"></i>
+                                <i class="fa fa-list" aria-hidden="true"></i>
                                 <span>User List</span>
                             </a>
 
@@ -165,9 +171,9 @@
 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./examples/register.html">
-                            <i class="ni ni-circle-08 text-pink"></i> Logout
-                        </a>
+                        <a class="nav-link" href="@Url.Action("login","Account")">
+                            <i class="ni ni-user-run"></i> Logout
+</a>
                     </li>
                 </ul>
 

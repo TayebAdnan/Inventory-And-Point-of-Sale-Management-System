@@ -14,20 +14,8 @@ namespace IMS.Controllers
 
         public ActionResult InventoryAlert()
         {
-            int Inventorycount = 0;
-
-            var a = db.Products.ToArray();
-
-
-            for (int i = 0; i < a.Length; i++)
-            {
-                if (a[i].ProductQuantity <= a[i].AlertQuantity)
-                {
-                    Inventorycount++;
-                }
-            }
-                    
-            ViewBag.countInventory = Inventorycount;
+            
+            ViewBag.countInventory = db.Products.Where(x => (x.ProductQuantity <= x.AlertQuantity)).Count();
 
             return View();
         }

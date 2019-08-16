@@ -22,7 +22,7 @@ namespace IMS.Controllers
 
             List<Sale> list = new List<Sale>();
 
-            list = db.Sales.Where(x => x.SaleDateTime >= start && x.SaleDateTime <= end).ToList();
+            list = db.Sales.Where(x => (x.SaleDateTime >= start && x.SaleDateTime <= end)).ToList();
            
             
             return View(list);

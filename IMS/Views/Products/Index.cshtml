@@ -4,79 +4,104 @@
     ViewBag.Title = "Index";
 }
 
-    <div>
-        <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
-        </div>
+<head>
+    
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+        #table {
+            display: block;
+  max-height: 100%;
+  overflow-y: scroll;
+    
+     border-radius: 25px;
+}
+        #table th {
+            font-family: Lato-Bold;
+            font-size: 18px;
+            color: #fff;
+            line-height: 1.4;
+            background-color: #6c7ae0;
+        }
+       
+           #table   td {
+    font-weight: unset;
+    padding-right: 10px;
+    font-size:14px;
+}
+       #table  tr    {
+            display: table;
+  width: 100%;
+  table-layout: fixed;
+            }
+        
+    </style>
+</head>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
-        <h2>Index</h2>
+<link href="~/Content/css/ProductView.css" rel="stylesheet" />
+<div style="color:#000000;background-color:#f0f0f5">
+    <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+    </div>
 
 
-        <head>
+    <h2 style="margin-left:450px">List of products</h2>
+    <div class="container">
+        <div class="container mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col"> </th>
+                                    <th>Product</th>
+                                    <th scope="col">Color</th>
+                                    <th scope="col">Size</th>
+                                    <th scope="col" class="text-center">Quantity</th>
+                                    <th scope="col" class="text-right">Price</th>
+                                    <th scope="col" class="text-right">Action</th>
 
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+                                </tr>
+                            </thead>
 
-        </head>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-
-        <link href="~/Content/css/ProductView.css" rel="stylesheet" />
-        <div class="container">
-            <div class="container mb-4">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
                                     <tr>
-                                        <th scope="col"> </th>
-                                        <th>Product</th>
-                                        <th scope="col">Color</th>
-                                        <th scope="col">Size</th>
-                                        <th scope="col" class="text-center">Quantity</th>
-                                        <th scope="col" class="text-right">Price</th>
-                                        <th scope="col" class="text-right">Action</th>
+                                        <td><img src=" @item.ProductImage" height="50" width="50" /></td>
+                                        <td>@item.ProductName</td>
+                                        <td>@item.Color.ColorName</td>
+                                        <td>@item.Size.SizeName</td>
+                                        <td style="width:10px">@item.ProductQuantity</td>
+                                        <td class="text-right">@item.SellingPrice</td>
+                                        <td class="text-right">
 
+                                            <a class="btn btn-sm btn-icon" href="@Url.Action("Edit","Products", new {id = item.ProductId })"><i class="fa fa-edit" style="font-size:18px"></i></a>
+                                            <a class="btn btn-sm btn-danger"><i class="fa f-trash" style="font-size:10px"></i></a>
 
+                                        </td>
                                     </tr>
-                                </thead>
-
-                                <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td><img src=" @item.ProductImage" height="50" width="50" /></td>
-                                            <td>@item.ProductName</td>
-                                            <td>@item.Color.ColorName</td>
-                                            <td>@item.Size.SizeName</td>
-                                            <td style="width:10px">@item.ProductQuantity</td>
-                                            <td class="text-right">@item.SellingPrice</td>
-                                            <td class="text-right">
-
-                                                <a class="btn btn-sm btn-icon" href="@Url.Action("Edit","Products", new {id = item.ProductId })"><i class="fa fa-edit" style="font-size:18px"></i></a>
-                                                <a class="btn btn-sm btn-danger"><i class="fa f-trash" style="font-size:10px"></i></a>
-
-                                            </td>
-                                        </tr>
-                                    }
-                                    
+                                }
 
 
-                                    
 
-                                </tbody>
-                            </table>
-                        </div>
+
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-       @* <img src=" @item.ProductImage" height="150" width="100" />*@
-
     </div>
+    @* <img src=" @item.ProductImage" height="150" width="100" />*@
 
-                                        
+</div>
+
