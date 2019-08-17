@@ -101,8 +101,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("GetDateRange","Report")">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i></i>Sales
+                        <a class="nav-link" href="@Url.Action("SaleList","Report")">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>Sales
                         </a>
                     </li>
 
@@ -136,7 +136,26 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-file" aria-hidden="true"></i></i> Report
+                            <i class="fa fa-file" aria-hidden="true"></i> Adjustments
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+                            <a href="@Url.Action("Create","Adjustments")" class="dropdown-item">
+                                <i class="ni ni-single-02"></i>
+                                <span>New Adjustment</span>
+                            </a>
+                            <a href="@Url.Action("Index","Adjustments")" class="dropdown-item">
+                                <i class="ni ni-single-02"></i>
+                                <span>Adjusted List</span>
+                            </a>
+
+                        </div>
+
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-file" aria-hidden="true"></i> Report
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
@@ -173,7 +192,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("login","Account")">
                             <i class="ni ni-user-run"></i> Logout
-</a>
+                        </a>
                     </li>
                 </ul>
 
@@ -186,7 +205,7 @@
         <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
             <div class="container-fluid">
                 <!-- Brand -->
-                <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="@Url.Action("Index","Home")">Dashboard</a>
+                <a></a>
                 <!-- Form -->
                 @*<form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
                         <div class="form-group mb-0">

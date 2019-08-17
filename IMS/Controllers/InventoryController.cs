@@ -25,12 +25,26 @@ namespace IMS.Controllers
         
         public ActionResult InventoryView(int CategoryId, int ColorId, int SizeId)
         {
+            
             var count = db.Products.Where(p => (p.CategoryId == CategoryId) && (p.ColorId == ColorId) && (p.SizeId==SizeId)).Sum(p => p.ProductQuantity);
+           
             ViewBag.InventoryCount = count;
-            ViewBag.ProductName = db.Products.Find(CategoryId).ProductName;
-            ViewBag.Color = db.Colors.Find(ColorId).ColorName;
-            ViewBag.Size = db.Sizes.Find(SizeId).SizeName;
-            return View();
+            if(ViewBag.InventoryCount == null) {
+                ViewBag.InventoryViewError = "This product is not available in Stock";
+
+                Inventory();
+                return View("Inventory");
+
+            }
+            else { 
+            
+                ViewBag.ProductName = db.Products.Find(CategoryId).ProductName;
+                ViewBag.Color = db.Colors.Find(ColorId).ColorName;
+                ViewBag.Size = db.Sizes.Find(SizeId).SizeName;
+                return View();
+            }
+
+
         }
 
 

@@ -17,6 +17,8 @@ namespace IMS.Models
         public int AdjustmentId { get; set; }
         public string AdjustmentReason { get; set; }
         public int ProductId { get; set; }
+        public int AdjustedQuantity { get; set; }
+        public DateTime AdjustedDateTime { get; set; }
     
         public virtual Product Product { get; set; }
     }

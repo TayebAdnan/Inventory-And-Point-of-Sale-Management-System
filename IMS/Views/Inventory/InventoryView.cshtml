@@ -4,8 +4,8 @@
     ViewBag.Title = "InventoryView";
 }
 
-    <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
-    </div>
+<div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+</div>
 <table>
     <tr>
         <th>Product Name</th>
@@ -14,12 +14,29 @@
         <th> Available Quantity</th>
     </tr>
 
-<tbody>
-    <tr>
-        <td>@ViewBag.ProductName</td>
-        <td>@ViewBag.Color</td>
-        <td>@ViewBag.Size</td>
-        <td>@ViewBag.InventoryCount</td>
-    </tr>
-</tbody>
+    <tbody>
+        <tr>
+            <td>@ViewBag.ProductName</td>
+            <td>@ViewBag.Color</td>
+            <td>@ViewBag.Size</td>
+            <td>@ViewBag.InventoryCount</td>
+        </tr>
+    </tbody>
 </table>
+
+
+@* Script for error showing*@
+
+@if (ViewBag.InventoryViewError != null)
+{
+    <script>
+
+$(document).ready(function(){
+
+alert('@ViewBag.InventoryViewError');
+
+});
+
+    </script>
+
+}

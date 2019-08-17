@@ -3,79 +3,73 @@
 @{
     ViewBag.Title = "Index";
 }
-
-    <div class="container">
+    <link href="~/Content/css/TableDesign.css" rel="stylesheet" />
+   
         <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
         </div>
-        <h2>Index</h2>
-        @if (User.IsInRole("Admin")) { 
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        }
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserEmail)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserPhone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserAddress)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserPassword)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UserImage)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Role.RoleName)
-                </th>
-                <th></th>
-            </tr>
+        <div>
+            <h2 style="margin-left:450px">User List</h2>
 
-            @foreach (var item in Model)
-            {
+            <table class="table" id="table">
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserEmail)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserPhone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserAddress)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UserPassword)
-                    </td>
-                    <td>
-                        <div class="img-responsive" style="margin-bottom:20px">
-                            @*<img src="~/App_File/ProductImages/@item.ProductImage" height="150" width="100" />*@
-                            <img src="@item.UserImage" height="150" width="100" />
-
-                        </div>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Role.RoleName)
-                    </td>
-                    @if (User.IsInRole("Admin")) { 
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
-                    </td>
-                    }
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserEmail)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserPhone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserAddress)
+                    </th>
+                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserImage)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Role.RoleName)
+                    </th>
+                    <th>Action</th>
                 </tr>
-            }
 
-        </table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserEmail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserPhone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserAddress)
+                        </td>
+                        
+                        <td>
+                            <div class="img-responsive" style="margin-bottom:20px">
+                                @*<img src="~/App_File/ProductImages/@item.ProductImage" height="150" width="100" />*@
+                                <img src="@item.UserImage" height="150" width="100" />
+
+                            </div>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role.RoleName)
+                        </td>
+                        
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+                            </td>
+                        
+                    </tr>
+                }
+
+            </table>
         </div>
+        

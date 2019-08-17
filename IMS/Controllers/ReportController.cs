@@ -22,6 +22,12 @@ namespace IMS.Controllers
 
             List<Sale> list = new List<Sale>();
 
+            ViewBag.StartDate = start.Day;
+            ViewBag.StartMonth = start.Month;
+            ViewBag.StartYear = start.Year;
+            ViewBag.EndDate = end.Day;
+            ViewBag.EndMonth = end.Month;
+            ViewBag.EndYear = end.Year;
             list = db.Sales.Where(x => (x.SaleDateTime >= start && x.SaleDateTime <= end)).ToList();
            
             
@@ -34,6 +40,11 @@ namespace IMS.Controllers
             var count = db.Products.Where(p => p.ProductDate == DateTime.Today).Sum(p => p.ProductQuantity);
             ViewBag.TodaysProduct = count;
             return View();
+        }
+
+        public ActionResult SaleList()
+        {   
+            return View(db.Sales.ToList());
         }
     }
 }

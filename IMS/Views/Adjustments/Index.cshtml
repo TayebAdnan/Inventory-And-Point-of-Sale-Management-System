@@ -1,0 +1,58 @@
+﻿@model IEnumerable<IMS.Models.Adjustment>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+    <link href="~/Content/css/TableDesign.css" rel="stylesheet" />
+
+    <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
+    </div>
+<h2 style="margin-left:400px">Adjusted List</h2>
+
+<table class="table" id="table" style="width:1000px; margin-left:45px">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AdjustmentReason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdjustedQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdjustedDateTime)
+        </th>
+        @if (User.IsInRole("Admin")) { 
+        <th>Action</th>
+        }
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.AdjustmentReason)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Product.ProductCode)
+
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AdjustedQuantity)
+
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.AdjustedDateTime)
+
+    </td>
+    @if (User.IsInRole("Admin")) { 
+    <td>
+        <a class="btn btn-sm btn-icon" href="@Url.Action("Edit", "Edit", new { id = item.AdjustmentId })"><i class="fa fa-edit" style="font-size:18px"></i></a>
+        <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "Delete", new { id = item.AdjustmentId })"><i class="fa fa-trash" aria-hidden="true"></i></a>
+    </td>
+    }
+</tr>
+}
+
+</table>

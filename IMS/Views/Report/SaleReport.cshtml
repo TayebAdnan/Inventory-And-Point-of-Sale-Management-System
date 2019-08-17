@@ -4,65 +4,82 @@
 @{
     ViewBag.Title = "Data";
 }
+<link href="~/Content/css/TableDesign.css" rel="stylesheet" />
 <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
 </div>
-<h2>Data</h2>
+<h2 style="margin-left:350px;margin-top:10px">List of Sales from @ViewBag.StartDate-@ViewBag.StartMonth-@ViewBag.StartYear to @ViewBag.EndDate-@ViewBag.EndMonth-@ViewBag.EndYear</h2>
 
+<div id="printTable">
+    <table class="table" id="table" style="border:1px solid #ddd;padding:8px">
+        <tr style="text-align:center">
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InvoiceNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vat)
+            </th>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Product.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InvoiceNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SaleDateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ItemTotal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Discount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TotalAmoun)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.ProductName)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.InvoiceNumber)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.SaleDateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemTotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalAmoun)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmoun)
+            </th>
 
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vat)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmoun)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+    <button style="margin-left:450px">Print</button>
+</div>
+
+    @* Script for printing *@
+    <script>
+        function printData() {
+            var divToPrint = document.getElementById("printTable");
+            newWin = window.open("");
+            newWin.document.write(divToPrint.outerHTML);
+            newWin.print();
+            newWin.close();
+        }
+    </script>
+    <script>
+
+        $('button').on('click', function () {
+            printData();
+        })
+
+    </script>

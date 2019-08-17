@@ -138,6 +138,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdjustmentsController.cs" />
     <Compile Include="Controllers\CeckController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
@@ -215,7 +216,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_File\ProductImages\bj.jpg" />
+    <Content Include="App_File\ProductImages\bluetshirt.jpg" />
+    <Content Include="App_File\ProductImages\Gb.jpg" />
+    <Content Include="App_File\ProductImages\greenpun.jpg" />
+    <Content Include="App_File\ProductImages\greenshirt.jpg" />
     <Content Include="App_File\ProductImages\IMG_20180720_182112.jpg" />
+    <Content Include="App_File\ProductImages\redshirt.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -226,6 +233,8 @@
     <Content Include="Content\css\ProductView.css" />
     <Content Include="Content\css\Product_View.css" />
     <Content Include="Content\css\Profile_View.css" />
+    <Content Include="Content\css\SearchBox.css" />
+    <Content Include="Content\css\TableDesign.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\brand\blue.png" />
@@ -2242,11 +2251,18 @@
     <Content Include="Views\Users\vv.cshtml" />
     <Content Include="Views\Inventory\InventoryList.cshtml" />
     <Content Include="Views\Requisition\Index.cshtml" />
+    <Content Include="Views\Adjustments\Delete.cshtml" />
+    <Content Include="Views\Adjustments\Details.cshtml" />
+    <Content Include="Views\Adjustments\Edit.cshtml" />
+    <Content Include="Views\Adjustments\Index.cshtml" />
+    <Content Include="Views\Report\SaleList.cshtml" />
+    <Content Include="Views\Adjustments\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_File\UserImages\" />
     <Folder Include="Images\" />
+    <Folder Include="Views\Adjustment\" />
     <Folder Include="Views\Color\" />
     <Folder Include="Views\WeekMonthReport\" />
   </ItemGroup>

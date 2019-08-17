@@ -16,7 +16,7 @@ namespace IMS.Controllers
         {
             
             ViewBag.countInventory = db.Products.Where(x => (x.ProductQuantity <= x.AlertQuantity)).Count();
-
+            
             return View();
         }
 
@@ -37,7 +37,7 @@ namespace IMS.Controllers
             
            //Sales in this month
 
-            DateTime firstOfWeek = DateTime.Today; 
+            DateTime firstOfWeek = DateTime.Today.AddDays(1); 
             DateTime lastofWeek = firstOfWeek.AddDays(-7);
             var SaleReports =0;
             try { 
@@ -49,6 +49,14 @@ namespace IMS.Controllers
                  SaleReports = 0;
             }
             ViewBag.SaleReports = SaleReports;
+
+
+            //Adjustments in this week
+            try
+            {
+                ViewBag.Adjustments = db.Adjustments.Where(x => (x.AdjustedDateTime <= firstOfWeek && x.AdjustedDateTime >= lastofWeek)).Sum(a => a.AdjustedQuantity);
+            }
+            catch { ViewBag.Adjustments = 0; }
             return View();
         }
 

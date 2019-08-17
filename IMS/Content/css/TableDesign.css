@@ -1,0 +1,35 @@
+﻿body {
+}
+#table {
+    display: block;
+    max-height: 600px;
+    overflow-y: scroll;
+    border-radius: 25px;
+}
+
+    #table th {
+        font-family: Lato-Bold;
+        font-size: 16px;
+        color: #fff;
+        line-height: 1.4;
+        background-color: #6c7ae0;
+        
+    }
+
+    #table td {
+        font-weight: unset;
+        padding-right: 10px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #table tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    
+
+

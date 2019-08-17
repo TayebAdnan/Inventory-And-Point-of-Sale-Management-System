@@ -12,6 +12,8 @@
           <Property Name="AdjustmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AdjustmentReason" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="AdjustedQuantity" Type="int" Nullable="false" />
+          <Property Name="AdjustedDateTime" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -405,6 +407,8 @@
           <Property Name="AdjustmentReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_Adjustment_Product" FromRole="Adjustment" ToRole="Product" />
+          <Property Name="AdjustedQuantity" Type="Int32" Nullable="false" />
+          <Property Name="AdjustedDateTime" Type="DateTime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -830,6 +834,8 @@
           <EntitySetMapping Name="Adjustments">
             <EntityTypeMapping TypeName="IMSModel.Adjustment">
               <MappingFragment StoreEntitySet="Adjustment">
+                <ScalarProperty Name="AdjustedDateTime" ColumnName="AdjustedDateTime" />
+                <ScalarProperty Name="AdjustedQuantity" ColumnName="AdjustedQuantity" />
                 <ScalarProperty Name="AdjustmentId" ColumnName="AdjustmentId" />
                 <ScalarProperty Name="AdjustmentReason" ColumnName="AdjustmentReason" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
