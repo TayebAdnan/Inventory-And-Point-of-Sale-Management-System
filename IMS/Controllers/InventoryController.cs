@@ -41,7 +41,7 @@ namespace IMS.Controllers
                 ViewBag.ProductName = db.Products.Find(CategoryId).ProductName;
                 ViewBag.Color = db.Colors.Find(ColorId).ColorName;
                 ViewBag.Size = db.Sizes.Find(SizeId).SizeName;
-                return View();
+                return View("InventoryView");
             }
 
 

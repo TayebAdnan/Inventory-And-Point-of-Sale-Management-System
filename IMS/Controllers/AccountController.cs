@@ -25,8 +25,7 @@ namespace IMS.Controllers
         [HttpPost]
         public ActionResult Login(User objUser)
         {
-            if (ModelState.IsValid)
-            {
+            
                 using (IMSEntities5 db = new IMSEntities5())
                 {
                     var obj = db.Users.Where(a => a.UserEmail.Equals(objUser.UserEmail) && a.UserPassword.Equals(objUser.UserPassword)).FirstOrDefault();
@@ -37,38 +36,27 @@ namespace IMS.Controllers
                         Session["UserEmail"] = obj.UserEmail.ToString();
                         Session["UserPhone"] = obj.UserPhone.ToString();
                         Session["UserAddress"] = obj.UserAddress.ToString();
-                        return RedirectToAction("MyProfile");
+                        Session["RoleName"] = obj.Role.RoleName.ToString();
+                    
+                    if(obj.Role.RoleName == "Admin") {
+                        return RedirectToAction("Index", "Home");
                     }
+
+                    else if(obj.Role.RoleName == "Employee")
+                    {
+                        return RedirectToAction("POS","Sale");
+                    }
+                        
+                    }
+
+                else { 
+                ViewBag.Error = "Username or Password is invalid";
                 }
             }
+            
             return View(objUser);
         }
        
-
-        //public ActionResult Login(User model, string returnUrl)
-        //{
-        //    IMSEntities3 db = new IMSEntities3();
-        //    var dataItem = db.Users.Where(x => x.UserEmail == model.UserEmail && x.UserPassword == model.UserPassword).First();
-        //    if (dataItem != null)
-        //    {
-        //        FormsAuthentication.SetAuthCookie(dataItem.UserName, false);
-        //        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-        //                 && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-        //        {
-        //            return Redirect(returnUrl);
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("RedirectToDefault");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        ModelState.AddModelError("", "Invalid user/pass");
-        //        return View();
-        //    }
-        //}
-
 
         public ActionResult SignOut()
         {
@@ -94,11 +82,11 @@ namespace IMS.Controllers
             String[] roles = Roles.GetRolesForUser();
             if (roles.Contains("Admin"))
             {
-                return RedirectToAction("Index", "Products");
+                return RedirectToAction("Index", "Home");
             }
-            else if (roles.Contains("Dealer"))
+            else if (roles.Contains("Employee"))
             {
-                return RedirectToAction("Index", "Dealer");
+                return RedirectToAction("POS", "Sale");
             }
             else if (roles.Contains("PublicUser"))
             {

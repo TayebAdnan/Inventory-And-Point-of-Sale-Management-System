@@ -65,8 +65,9 @@ namespace IMS.Controllers
         public ActionResult BarChart()
         {
             var DayBeforeSeven = DateTime.Today.AddDays(-7);
+            var DayToday = DateTime.Today.AddDays(1);
             try { 
-            Session["Shirt"] = db.ProductSales.Where(a => (a.Product.ProductName == "Shirt") && (a.Sale.SaleDateTime <= DateTime.Today && a.Sale.SaleDateTime >= DayBeforeSeven)).Sum(a => a.SaleQuantity);
+            Session["Shirt"] = db.ProductSales.Where(a => (a.Product.ProductName == "Shirt") && (a.Sale.SaleDateTime <= DayToday && a.Sale.SaleDateTime >= DayBeforeSeven)).Sum(a => a.SaleQuantity);
             
             }
             catch
@@ -77,7 +78,7 @@ namespace IMS.Controllers
 
             try
             {
-                Session["JeansPant"] = db.ProductSales.Where(a => (a.Product.ProductName == "Jeans Pant") && (a.Sale.SaleDateTime <= DateTime.Today && a.Sale.SaleDateTime >= DayBeforeSeven)).Sum(a => a.SaleQuantity);
+                Session["JeansPant"] = db.ProductSales.Where(a => (a.Product.ProductName == "Jeans Pant") && (a.Sale.SaleDateTime <= DayToday && a.Sale.SaleDateTime >= DayBeforeSeven)).Sum(a => a.SaleQuantity);
             }
             catch
             {
@@ -86,12 +87,12 @@ namespace IMS.Controllers
             }
             try
             {
-                Session["GabadinPant"] = db.ProductSales.Where(a => (a.Product.ProductName == "Gabadin Pant") && (a.Sale.SaleDateTime <= DateTime.Today && a.Sale.SaleDateTime >= DayBeforeSeven)).Sum(a => a.SaleQuantity);
+                Session["GabadinPant"] = db.ProductSales.Where(a => (a.Product.ProductName == "Gabadine Pant") && (a.Sale.SaleDateTime <= DayToday && a.Sale.SaleDateTime >= DayBeforeSeven)).Sum(a => a.SaleQuantity);
             }
             catch { Session["GabadinPant"] = 0; }
-            try { Session["T-Shirt"] = db.ProductSales.Where(a => (a.Product.ProductName == "T-Shirt") && (a.Sale.SaleDateTime <= DateTime.Today && a.Sale.SaleDateTime >= DayBeforeSeven)).Sum(a => a.SaleQuantity); }
+            try { Session["T-Shirt"] = db.ProductSales.Where(a => (a.Product.ProductName == "T-Shirt") && (a.Sale.SaleDateTime <= DayToday && a.Sale.SaleDateTime >= DayBeforeSeven)).Sum(a => a.SaleQuantity); }
             catch { Session["T-Shirt"] = 0; }
-            try { Session["Punjabi"] = db.ProductSales.Where(a => (a.Product.ProductName == "Punjabi") && (a.Sale.SaleDateTime <= DateTime.Today && a.Sale.SaleDateTime >= DayBeforeSeven)).Sum(a => a.SaleQuantity); }
+            try { Session["Punjabi"] = db.ProductSales.Where(a => (a.Product.ProductName == "Punjabi") && (a.Sale.SaleDateTime <= DayToday && a.Sale.SaleDateTime >= DayBeforeSeven)).Sum(a => a.SaleQuantity); }
             catch { Session["Punjabi"] = 0; }
             return View();
         }

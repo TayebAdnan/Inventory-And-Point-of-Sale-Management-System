@@ -16,7 +16,7 @@ namespace IMS.Controllers
     {
         private IMSEntities5 db = new IMSEntities5();
 
-        // GET: Products
+        
         public ActionResult Index()
         {
             var products = db.Products.Include(p => p.Category).Include(p => p.Color).Include(p => p.Manufacture).Include(p => p.Size);
@@ -111,9 +111,9 @@ namespace IMS.Controllers
                     }
                     );
                 db.SaveChanges();
+                
 
-
-                 return RedirectToAction("Index");
+                 return RedirectToAction("Create");
                     
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", product.CategoryId);

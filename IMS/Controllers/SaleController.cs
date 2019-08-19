@@ -126,7 +126,7 @@ namespace IMS.Controllers
 
             sales.Add(
                 new Sale
-                {
+                {   ProductId = product.ProductId,
                     InvoiceNumber = ViewBag.InvoiceNumber,
                     SaleDateTime = DateTime.Now,
                     ItemTotal = ViewBag.ItemTotal,
@@ -164,7 +164,7 @@ namespace IMS.Controllers
                 db.Sales.Add(
                     new Sale()
                     {
-                        ProductId = 2,
+                        ProductId = item.ProductId,
                         SaleDateTime = item.SaleDateTime,
                         ItemTotal = item.ItemTotal,
                         Vat = item.Vat,

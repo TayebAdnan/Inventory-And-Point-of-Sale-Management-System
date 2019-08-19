@@ -34,18 +34,22 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control " } })
                         @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                    <div class="row" style="margin-left:15px">
+                        @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control col-md-9" })
                         @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                        <input type="button" value="+" onclick="location.href='@Url.Action("Index", "Products")'"/>
                     </div>
+
                 </div>
 
                 <div class="form-group">
@@ -114,6 +118,18 @@
 
     </div>
 </div>
+@* Script for error showing*@
 
+@if(ViewBag.FileStatus != null) { 
+    <script>
 
+$(document).ready(function(){
+
+alert('@ViewBag.FileStatus');
+
+});
+
+    </script>
+
+    }
 

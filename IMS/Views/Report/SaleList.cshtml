@@ -50,10 +50,10 @@
 
         <th>
             @Html.DisplayNameFor(model => model.Product.ProductCode)
-        </th>@if (User.IsInRole("Admin"))
-        {
+        </th>
+        
             <th>Action</th>
-            }
+            
         </tr>
 
 @foreach (var item in Model) {
@@ -79,13 +79,12 @@
     <td>
         @Html.DisplayFor(modelItem => item.Product.ProductCode)
     </td>
-    @if (User.IsInRole("Admin"))
-    {
+    
         <td>
             <a class="btn btn-sm btn-icon" href="@Url.Action("Edit", "Edit", new { id = item.SaleId })"><i class="fa fa-edit" style="font-size:18px"></i></a>
             <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "Delete", new { id = item.SaleId })"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </td>
-    }
+    
     </tr>
 }
 

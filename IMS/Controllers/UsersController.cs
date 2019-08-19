@@ -49,7 +49,7 @@ namespace IMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserId,UserName,UserEmail,UserPhone,UserAddress,UserPassword,UserImage,RoleId")]
+        public ActionResult Create([Bind(Include = "UserId,UserName,UserEmail,UserPhone,UserAddress,UserPassword,RoleId")]
         User user, HttpPostedFileBase UserImage)
         {
            
@@ -81,7 +81,7 @@ namespace IMS.Controllers
 
             ViewBag.RoleId = new SelectList(db.Roles, "RoleId", "RoleName", user.RoleId);
             return View(user);
-        }
+            }
 
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)

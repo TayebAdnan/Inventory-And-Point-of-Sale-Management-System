@@ -21,8 +21,7 @@ namespace IMS
         {
             throw new NotImplementedException();
         }
-
-        public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
+               public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
         {
             throw new NotImplementedException();
         }

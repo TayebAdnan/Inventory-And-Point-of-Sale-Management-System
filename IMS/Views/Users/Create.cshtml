@@ -63,14 +63,15 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.UserImage, "UserImage", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.UserImage, "User Image", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <input type="file" id="UserImage" name="UserImage" class="form-control" /><br />
+                    @Html.ValidationMessageFor(model => model.UserImage, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.RoleId, "RoleId", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.RoleId, "Role", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownList("RoleId", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })

@@ -24,7 +24,7 @@
     <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
     </div>
 
-
+   
     <h2 style="margin-left:450px">List of products</h2>
     <div class="container">
         <div class="container mb-4">
@@ -40,14 +40,14 @@
                                     <th scope="col">Size</th>
                                     <th class="text-right">Quantity</th>
                                     <th scope="col">Price</th>
-                                    @if (User.IsInRole("Admin"))
+                                    @if (Session["RoleName"].ToString() == "Admin")
                                     {
                                         <th scope="col" class="text-right">Action</th>
                                     }
 
                                     </tr>
                             </thead>
-
+                            
                             <tbody>
                                 @foreach (var item in Model)
                                 {
@@ -58,18 +58,18 @@
                                         <td>@item.Size.SizeName</td>
                                         <td style="width:10px">@item.ProductQuantity</td>
                                         <td class="text-right">@item.SellingPrice</td>
-                                       @if (User.IsInRole("Admin")) { 
-                                    <td class="text-right">
-                                        <a class="btn btn-sm btn-icon" href="@Url.Action("Edit","Products", new {id = item.ProductId })"><i class="fa fa-edit" style="font-size:18px"></i></a>
-                                        <a class="btn btn-sm btn-danger" href="@Url.Action("Delete","Products", new {id = item.ProductId })"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        
-                                    </td>
-                                       }
+                                        @if(Session["RoleName"].ToString() == "Admin") { 
+                                            <td class="text-right">
+                                                <a class="btn btn-sm btn-icon" href="@Url.Action("Edit","Products", new {id = item.ProductId })"><i class="fa fa-edit" style="font-size:18px"></i></a>
+                                                <a class="btn btn-sm btn-danger" href="@Url.Action("Delete","Products", new {id = item.ProductId })"><i class="fa fa-trash" aria-hidden="true"></i></a>
+
+                                            </td>
+                                        }
                                     </tr>
                                 }
 
 
-                                
+
 
 
 
@@ -80,7 +80,10 @@
             </div>
         </div>
     </div>
+
+   
     @* <img src=" @item.ProductImage" height="150" width="100" />*@
 
 </div>
+       
 

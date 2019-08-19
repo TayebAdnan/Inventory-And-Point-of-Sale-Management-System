@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdjustmentsController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CeckController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
@@ -189,7 +190,7 @@
     <Compile Include="Models\Product.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductPartial.cs" />
+    <Compile Include="Models\Validation\ProductPartial.cs" />
     <Compile Include="Models\ProductSale.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -212,6 +213,8 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Validation\RoleMetadata.cs" />
+    <Compile Include="Models\Validation\UserPartial.cs" />
     <Compile Include="ProjectRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2257,6 +2260,11 @@
     <Content Include="Views\Adjustments\Index.cshtml" />
     <Content Include="Views\Report\SaleList.cshtml" />
     <Content Include="Views\Adjustments\Create.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,7 +7,7 @@ using System.Web;
 namespace IMS.Models
 {
     [MetadataType(typeof(ProductMetaData))]
-    public class ProductPartial
+    public partial class Product
     {
     }
 }
@@ -15,7 +15,8 @@ namespace IMS.Models
 
 public class ProductMetaData
 {
-    [Display(Name = "Product Name")]
+    [Display(Name = "Product Code")]
+    [Required]
     public string ProductCode { get; set; }
 
     [Display(Name = "Product Name")]
