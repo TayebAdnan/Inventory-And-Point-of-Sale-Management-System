@@ -20,7 +20,7 @@ namespace IMS.Models
         {
             this.Products = new HashSet<Product>();
         }
-         [Key]
+         
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
     

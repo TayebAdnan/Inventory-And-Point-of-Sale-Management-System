@@ -64,14 +64,13 @@ namespace IMS.Controllers
             
             if (ModelState.IsValid)
             {
-
                 try
                 {
                     if (db.Products.Any(a => a.ProductCode == product.ProductCode))
                             {
                                 db.Database.ExecuteSqlCommand("UPDATE [dbo].[Product] SET ProductQuantity = ProductQuantity+'"+product.ProductQuantity+"' WHERE ProductCode = '" + product.ProductCode + "'");
                             }
-
+                    
                     else { 
                         if (ProductImage != null)
                     {
