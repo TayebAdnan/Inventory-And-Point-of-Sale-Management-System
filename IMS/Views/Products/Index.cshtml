@@ -61,16 +61,12 @@
                                         @if(Session["RoleName"].ToString() == "Admin") { 
                                             <td class="text-right">
                                                 <a class="btn btn-sm btn-icon" href="@Url.Action("Edit","Products", new {id = item.ProductId })"><i class="fa fa-edit" style="font-size:18px"></i></a>
-                                                <a class="btn btn-sm btn-danger" href="@Url.Action("Delete","Products", new {id = item.ProductId })"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                @*<a class="btn btn-sm btn-danger" href="@Url.Action("Delete","Products", new {id = item.ProductId })"><i class="fa fa-trash" aria-hidden="true"></i></a>*@
 
                                             </td>
                                         }
                                     </tr>
                                 }
-
-
-
-
 
 
                             </tbody>

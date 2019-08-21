@@ -61,6 +61,7 @@ namespace IMS.Controllers
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", category.CategoryId);
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", category.CategoryId);
             return View(category);
+            //https://stackoverflow.com/questions/36258700/mvc5-validation-failed-for-one-or-more-entities-see-entityvalidationerrors-pr
         }
 
         // GET: Categories/Edit/5

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -201,17 +202,33 @@ namespace IMS.Controllers
                              select new { c.ProductName, c.ProductId });
             return new JsonResult { Data = allsearch, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
-        
-        public JsonResult GetProducts(string Prefix)
+
+        public ActionResult AddNewCategory(string qty)
         {
+            Category category = new Category();
+            if (ModelState.IsValid)
+            {
+                category.CategoryName = qty;
+                try
+                {
+                    db.Categories.Add(category);
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            System.Console.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                        }
+                    }
+                }
 
-            var Products = (from c in db.Products
-                             where c.ProductName.StartsWith(Prefix)
-                             select new { c.ProductName, c.ProductId });
-            return Json(Products, JsonRequestBehavior.AllowGet);
+
+            }
+            return View("Create");
         }
-
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

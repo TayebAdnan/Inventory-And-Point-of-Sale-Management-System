@@ -140,6 +140,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdjustmentsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CeckController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
@@ -232,6 +233,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\argon.css" />
     <Content Include="Content\css\argon.min.css" />
+    <Content Include="Content\css\CategoryCreate.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\ProductView.css" />
     <Content Include="Content\css\Product_View.css" />
@@ -2260,17 +2262,18 @@
     <Content Include="Views\Adjustments\Index.cshtml" />
     <Content Include="Views\Report\SaleList.cshtml" />
     <Content Include="Views\Adjustments\Create.cshtml" />
-    <Content Include="Views\Categories\Create.cshtml" />
     <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_File\UserImages\" />
     <Folder Include="Images\" />
     <Folder Include="Views\Adjustment\" />
+    <Folder Include="Views\Category\" />
     <Folder Include="Views\Color\" />
     <Folder Include="Views\WeekMonthReport\" />
   </ItemGroup>
