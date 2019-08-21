@@ -1,0 +1,30 @@
+﻿@model IEnumerable<IMS.Models.Adjustment>
+
+@{
+    ViewBag.Title = "ListToAdjust";
+}
+
+<h2>ListToAdjust</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductCode)
+        </th>
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.ProductCode)
+        </td>
+        <td>+</td>
+    </tr>
+}
+
+</table>

@@ -20,6 +20,11 @@ namespace IMS.Controllers
             var adjustments = db.Adjustments.Include(a => a.Product);
             return View(adjustments.ToList());
         }
+        public ActionResult ListToAdjust()
+        {
+            var adjustments = db.Adjustments.Include(a => a.Product);
+            return View(adjustments.ToList());
+        }
 
         // GET: Adjustments/Details/5
         public ActionResult Details(int? id)
@@ -48,8 +53,10 @@ namespace IMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AdjustmentId,AdjustmentReason,ProductId,AdjustedQuantity,AdjustedDateTime")] Adjustment adjustment)
+        public ActionResult Create([Bind(Include = "AdjustmentId,AdjustmentReason,ProductId,AdjustedQuantity,AdjustedDateTime")]
+        Adjustment adjustment)
         {
+            
             if (ModelState.IsValid)
             {
                 db.Adjustments.Add(adjustment);

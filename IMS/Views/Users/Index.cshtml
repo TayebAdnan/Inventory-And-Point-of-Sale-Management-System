@@ -2,7 +2,11 @@
 
 @{
     ViewBag.Title = "Index";
+
 }
+    <div class="header bg-gradient-primary pb-4 pt-3 pt-md-4">
+
+    </div>
     <link href="~/Content/css/TableDesign.css" rel="stylesheet" />
    
         <div class="header bg-gradient-primary pb-5 pt-3 pt-md-5">
@@ -25,9 +29,7 @@
                         @Html.DisplayNameFor(model => model.UserAddress)
                     </th>
                     
-                    <th>
-                        @Html.DisplayNameFor(model => model.UserImage)
-                    </th>
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.Role.RoleName)
                     </th>
@@ -50,13 +52,8 @@
                             @Html.DisplayFor(modelItem => item.UserAddress)
                         </td>
                         
-                        <td>
-                            <div class="img-responsive" style="margin-bottom:20px">
-                                @*<img src="~/App_File/ProductImages/@item.ProductImage" height="150" width="100" />*@
-                                <img src="@item.UserImage" height="150" width="100" />
+                        
 
-                            </div>
-                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Role.RoleName)
                         </td>

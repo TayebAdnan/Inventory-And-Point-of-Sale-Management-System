@@ -21,7 +21,7 @@ public class ProductMetaData
 
     [Display(Name = "Product Name")]
     [Required]
-    [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+    [RegularExpression(@"^[a-zA-Z-]+$", ErrorMessage = "Use a valid name please")]
     public string ProductName { get; set; }
     [Display(Name = "Category")]
     [Required]
@@ -45,7 +45,7 @@ public class ProductMetaData
     public string SellingPrice { get; set; }
     //public byte[] Image { get; set; }
     [Display(Name = "Product Image")]
-    [Required]
+    
     public String ProductImage { get; set; }
     public int ManufactureId { get; set; }
     public Nullable<System.DateTime> ProductDate { get; set; }

@@ -70,7 +70,9 @@ namespace IMS.Controllers
                     db.Users.Add(user);
                 db.SaveChanges();
                 }
-                return RedirectToAction("Index");
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                return RedirectToAction("Message");
                 }
 
                 catch(Exception)
@@ -142,7 +144,7 @@ namespace IMS.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult vv()
+        public ActionResult Message()
         {
             return View();
         }

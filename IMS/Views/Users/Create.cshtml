@@ -17,7 +17,7 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-           
+
         <div class="form-horizontal">
             <h2 style="color:#000000; text-decoration:double; margin-left:380px">ADD NEW User</h2>
             <hr />
@@ -62,13 +62,13 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.UserImage, "User Image", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <input type="file" id="UserImage" name="UserImage" class="form-control" /><br />
                     @Html.ValidationMessageFor(model => model.UserImage, "", new { @class = "text-danger" })
                 </div>
-            </div>
+           *@ </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.RoleId, "Role", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -83,7 +83,8 @@
                     <input type="submit" value="Create" class="btn btn-default" />
                 </div>
             </div>
-        </div>
         }
+        </div>
+        
     </div>
-</div>
+

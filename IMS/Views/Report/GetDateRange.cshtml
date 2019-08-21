@@ -19,3 +19,18 @@
 
     }
 </p>
+
+@if (ViewBag.DateError != null)
+{
+        <script>
+
+$(document).ready(function(){
+
+alert('@ViewBag.DateError');
+
+});
+
+        </script>
+
+    }
+

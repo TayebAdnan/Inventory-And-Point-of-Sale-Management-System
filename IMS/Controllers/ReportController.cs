@@ -19,7 +19,17 @@ namespace IMS.Controllers
 
         public ActionResult SaleReport(DateTime start, DateTime end)
         {
-
+            if(start == null)
+            {
+                ViewBag.DateError = "Set a Date please";
+                return View("GetDateRange");
+            }
+            if (end == null)
+            {
+                ViewBag.DateError = "Set a Date please";
+                return View("GetDateRange");
+            }
+            else { 
             List<Sale> list = new List<Sale>();
 
             ViewBag.StartDate = start.Day;
@@ -32,6 +42,7 @@ namespace IMS.Controllers
            
             
             return View(list);
+            }
         }
 
         public ActionResult TodaysProduct()
