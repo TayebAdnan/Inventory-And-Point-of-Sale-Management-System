@@ -11,13 +11,18 @@ namespace IMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Adjustment
     {
         public int AdjustmentId { get; set; }
+        [Display(Name = "Reason")]
         public string AdjustmentReason { get; set; }
+        [Display(Name = "Product Code")]
         public int ProductId { get; set; }
+        [Display(Name = "Quantity")]
         public int AdjustedQuantity { get; set; }
+        [Display(Name = "Date")]
         public DateTime AdjustedDateTime { get; set; }
     
         public virtual Product Product { get; set; }

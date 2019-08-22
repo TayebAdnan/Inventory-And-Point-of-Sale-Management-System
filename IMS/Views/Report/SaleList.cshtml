@@ -52,7 +52,7 @@
             @Html.DisplayNameFor(model => model.Product.ProductCode)
         </th>
         
-            <th>Action</th>
+            @*<th>Action</th>*@
             
         </tr>
 
@@ -80,10 +80,10 @@
         @Html.DisplayFor(modelItem => item.Product.ProductCode)
     </td>
     
-        <td>
+        @*<td>
             <a class="btn btn-sm btn-icon" href="@Url.Action("Edit", "Edit", new { id = item.SaleId })"><i class="fa fa-edit" style="font-size:18px"></i></a>
-            <a class="btn btn-sm btn-danger" href="@Url.Action("Delete", "Delete", new { id = item.SaleId })"><i class="fa fa-trash" aria-hidden="true"></i></a>
-        </td>
+            
+        </td>*@
     
     </tr>
 }

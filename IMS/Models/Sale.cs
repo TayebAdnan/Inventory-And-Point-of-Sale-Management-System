@@ -11,7 +11,8 @@ namespace IMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Sale
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,12 +25,17 @@ namespace IMS.Models
         public int SaleId { get; set; }
         public int ProductId { get; set; }
         public int TransactionId { get; set; }
+        [Display(Name = "Invoice Number")]
         public int InvoiceNumber { get; set; }
         public int CustomerId { get; set; }
+        [Display(Name = "Sale Date")]
         public DateTime SaleDateTime { get; set; }
+        [Display(Name = "Item Total")]
         public decimal ItemTotal { get; set; }
+        [Display(Name = "Vat")]
         public decimal Vat { get; set; }
         public decimal Discount { get; set; }
+        [Display(Name = "Total Amount")]
         public decimal TotalAmoun { get; set; }
 
         public virtual Product Product { get; set; }

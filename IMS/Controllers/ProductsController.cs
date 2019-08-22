@@ -26,6 +26,14 @@ namespace IMS.Controllers
             
             
         }
+        public ActionResult Message()
+        {
+            
+
+            return View();
+
+
+        }
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)
@@ -113,7 +121,7 @@ namespace IMS.Controllers
                 db.SaveChanges();
                 
 
-                 return RedirectToAction("Create");
+                 return RedirectToAction("Message","Products");
                     
             }
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryName", product.CategoryId);
